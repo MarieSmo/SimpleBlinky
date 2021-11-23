@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ -z "${DRBIP_HOME}" ]; then
+    DRBIP_HOME="$(dirname $0)/../"
+fi
+
+cp ${DRBIP_HOME}/templates/drbip.h $2/drbip.h
+sed "s/%model%/$1/"  ${DRBIP_HOME}/templates/Reconfigure.cpp > $2/Reconfigure.cpp

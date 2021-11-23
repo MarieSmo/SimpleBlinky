@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [ -z "${DRBIP_HOME}" ]; then
+    DRBIP_HOME=$(dirname $0)
+fi
+
+if [ -z "${BIP2_HOME}" ]; then
+    BIP2_HOME=${DRBIP_HOME}/../bipc
+fi
+
+java -cp "${DRBIP_HOME}/lib/*:${BIP2_HOME}/lib/*:${DRBIP_HOME}/drbip-core-0.0.2.jar" \
+     ujf.verimag.drbip.Loader $*
