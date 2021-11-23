@@ -1,0 +1,31 @@
+model SimpleBlinky
+
+import from "SimpleBlinky.cpp" {
+
+    condition NodeMCU(MCU)
+    condition NodeSurfaceLeft(SURFACES)
+    condition NodeSurfaceRight(SURFACES)
+
+    structure SimpleBlinkyMap {
+        bool isTurnOn()
+        void addMcu(MCU)
+        void addSurfaces(SURFACES)
+    }
+
+    structure BBMap {
+        Node extend()
+        void erase(Node)
+        const bool isNeighbour(Node, Node, int)
+    }
+}
+
+motif MotifSimple<SimpleBlinkyMap> {
+    rule interaction BlockInitializer(MCU mcu, SURFACES s)
+    when(true) {
+        new switchElementOnOff(s, mcu)
+    }
+}
+
+initializer {
+    b1 = new MotifSimple()
+}

@@ -1,0 +1,1 @@
+/usr/bin/c++  -Wall -std=c++0x     -rdynamic CMakeFiles/system.dir/Deploy/Deploy.cpp.o  -o system 
