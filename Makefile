@@ -2,7 +2,7 @@ PACK?=SimpleBlinky
 SYS?=SYS()
 
 V?=0.0.2
-TOOLS=../tools
+TOOLS=./tools
 BIP=${TOOLS}/bipc/bin/bipc.sh
 DR_PATH=${TOOLS}/drbip
 BIPEXEC?=./exec.sh

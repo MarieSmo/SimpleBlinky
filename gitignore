@@ -1,7 +1,7 @@
 # Configuration file
 .idea
-build
-output
+./build
+./output
 **/model/HelloPackage.bip
 **/model/HelloPackage.cpp
 **/model/HelloPackage.drbip
