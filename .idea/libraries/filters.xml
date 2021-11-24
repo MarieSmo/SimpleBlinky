@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="filters">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/tools/bipc/lib/filters/ujf.verimag.bip.middleend.flattening_1.0-20200217094853.jar!/" />
+      <root url="jar://$PROJECT_DIR$/tools/bipc/lib/filters/ujf.verimag.bip.middleend.gluetranslator_1.0-20200217094853.jar!/" />
+      <root url="jar://$PROJECT_DIR$/tools/bipc/lib/filters/ujf.verimag.bip.middleend.xflattening_1.0-20200217094854.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

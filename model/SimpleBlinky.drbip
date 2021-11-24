@@ -2,14 +2,13 @@ model SimpleBlinky
 
 import from "SimpleBlinky.cpp" {
 
-    condition NodeMCU(MCU)
-    condition NodeSurfaceLeft(SURFACES)
-    condition NodeSurfaceRight(SURFACES)
+    condition NodeCore(CORE)
+    condition NodeSurface(SURFACES)
+    //condition NodeSurfaceLeft(SURFACES)
+    //condition NodeSurfaceRight(SURFACES)
 
     structure SimpleBlinkyMap {
-        bool isTurnOn()
-        void addMcu(MCU)
-        void addSurfaces(SURFACES)
+        bool isConnected(Node, Node)
     }
 
     structure BBMap {
@@ -20,15 +19,15 @@ import from "SimpleBlinky.cpp" {
 }
 
 motif MotifSimple<SimpleBlinkyMap> {
-    rule interaction BlockInitializer(MCU mcu, SURFACES s)
-    when(true) {
-        new ConnectMCUandSurface(s, mcu)
+    rule interaction BlockInitializer(SURFACES s, CORE c)
+    when(true, S.isConnected(@c, @s) ){
+        new ConnectCoreAndSurface(s, c)
     }
 }
 
 initializer {
     b1 = new MotifSimple()
 
-    mcu = new MCU(1)
+    core = new CORE(1)
     surfaces = new SURFACES()
 }

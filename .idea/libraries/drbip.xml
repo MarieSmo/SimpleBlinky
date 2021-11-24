@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="drbip">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/tools/drbip/drbip-core-0.0.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/tools/drbip/drbip-trace-0.0.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -1,0 +1,46 @@
+<component name="libraryTable">
+  <library name="lib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/tools/bipc/lib/lpsolve55j_.jar!/" />
+      <root url="jar://$PROJECT_DIR$/tools/bipc/lib/ujf.verimag.bip.error_1.0-20200217094827.jar!/" />
+      <root url="jar://$PROJECT_DIR$/tools/bipc/lib/ujf.verimag.bip.middleend_1.0-20200217094839.jar!/" />
+      <root url="jar://$PROJECT_DIR$/tools/bipc/lib/org.eclipse.core.jobs_3.5.200.v20120521-2346.jar!/" />
+      <root url="jar://$PROJECT_DIR$/tools/bipc/lib/org.eclipse.core.runtime_3.8.0.v20120521-2346.jar!/" />
+      <root url="jar://$PROJECT_DIR$/tools/bipc/lib/org.eclipse.acceleo.parser_3.6.6.201610060831.jar!/" />
+      <root url="jar://$PROJECT_DIR$/tools/bipc/lib/org.eclipse.ocl_3.2.0.v20120611-1210.jar!/" />
+      <root url="jar://$PROJECT_DIR$/tools/bipc/lib/ujf.verimag.bip.middleend.util_1.0-20200217094837.jar!/" />
+      <root url="jar://$PROJECT_DIR$/tools/bipc/lib/ujf.verimag.bip_1.0-20200217094837.jar!/" />
+      <root url="jar://$PROJECT_DIR$/tools/bipc/lib/joptsimple_3.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/tools/bipc/lib/ujf.verimag.bip.metamodel_1.0-20200217094828.jar!/" />
+      <root url="jar://$PROJECT_DIR$/tools/bipc/lib/org.eclipse.emf.ecore_2.8.0.v20120606-0717.jar!/" />
+      <root url="jar://$PROJECT_DIR$/tools/bipc/lib/acceleo.standalone.compiler_1.0-20200217094837.jar!/" />
+      <root url="jar://$PROJECT_DIR$/tools/bipc/lib/org.eclipse.equinox.common_3.6.100.v20120522-1841.jar!/" />
+      <root url="jar://$PROJECT_DIR$/tools/bipc/lib/org.eclipse.emf.ecore.xmi_2.8.0.v20120606-0717.jar!/" />
+      <root url="jar://$PROJECT_DIR$/tools/bipc/lib/org.eclipse.acceleo.model_3.6.6.201610060831.jar!/" />
+      <root url="jar://$PROJECT_DIR$/tools/bipc/lib/org.eclipse.core.contenttype_3.4.200.v20120523-2004.jar!/" />
+      <root url="jar://$PROJECT_DIR$/tools/bipc/lib/org.eclipse.equinox.app_1.3.100.v20120522-1841.jar!/" />
+      <root url="jar://$PROJECT_DIR$/tools/bipc/lib/org.antlr_3.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/tools/bipc/lib/org.eclipse.acceleo.engine_3.6.6.201610060831.jar!/" />
+      <root url="jar://$PROJECT_DIR$/tools/bipc/lib/lpg.runtime.java_2.0.17.v201004271640.jar!/" />
+      <root url="jar://$PROJECT_DIR$/tools/bipc/lib/com.google.collect_1.0.0.v201105210816.jar!/" />
+      <root url="jar://$PROJECT_DIR$/tools/bipc/lib/org.eclipse.acceleo.common_3.6.6.201610060831.jar!/" />
+      <root url="jar://$PROJECT_DIR$/tools/bipc/lib/org.eclipse.emf.mapping.ecore2xml_2.7.0.v20120608-0554.jar!/" />
+      <root url="jar://$PROJECT_DIR$/tools/bipc/lib/ujf.verimag.bip.userinterface.cli_1.0-20200217094840.jar!/" />
+      <root url="jar://$PROJECT_DIR$/tools/bipc/lib/org.eclipse.osgi_3.8.0.v20120529-1548.jar!/" />
+      <root url="jar://$PROJECT_DIR$/tools/bipc/lib/org.eclipse.acceleo.profiler_3.6.6.201610060831.jar!/" />
+      <root url="jar://$PROJECT_DIR$/tools/bipc/lib/org.eclipse.emf.common_2.8.0.v20120606-0717.jar!/" />
+      <root url="jar://$PROJECT_DIR$/tools/bipc/lib/org.eclipse.ocl.common_1.0.0.v20120516-1543.jar!/" />
+      <root url="jar://$PROJECT_DIR$/tools/bipc/lib/ujf.verimag.bip.instantiator_1.0-20200217094837.jar!/" />
+      <root url="jar://$PROJECT_DIR$/tools/bipc/lib/org.eclipse.ocl.ecore_3.2.0.v20120522-1637.jar!/" />
+      <root url="jar://$PROJECT_DIR$/tools/bipc/lib/ujf.verimag.bip.backend_1.0-20200217094837.jar!/" />
+      <root url="jar://$PROJECT_DIR$/tools/bipc/lib/ujf.verimag.bip.parser_1.0-20200217094831.jar!/" />
+      <root url="jar://$PROJECT_DIR$/tools/bipc/lib/org.eclipse.equinox.preferences_3.5.0.v20120522-1841.jar!/" />
+      <root url="jar://$PROJECT_DIR$/tools/bipc/lib/runtime_registry_compatibility.jar!/" />
+      <root url="jar://$PROJECT_DIR$/tools/bipc/lib/org.eclipse.equinox.registry_3.5.200.v20120522-1841.jar!/" />
+      <root url="jar://$PROJECT_DIR$/tools/bipc/lib/org.apache.ant_1.8.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/tools/bipc/lib/org.eclipse.emf_2.6.0.v20120608-0554.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

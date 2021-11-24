@@ -1,106 +1,77 @@
-@cpp(include="ext.cpp")
+@cpp(include="stdio.h")
 package SimpleBlinky
 	extern function printf(string)
 	extern function printf(string, int)
-	extern function int what_connected (const int,const int)
-	extern function const string connection (int)
 
 	port type SyncPort()
 
-	connector type InternalConnection(SyncPort elem)
-		define elem
+    //connect block surface to other block's surface
+	connector type Connection(SyncPort b1, SyncPort b2)
+		define b1 b2
 	end
 
-	connector type ConnectMCUandSurface(SyncPort elem, SyncPort switcher)
-		define elem switcher
+	connector type ConnectCoreAndSurface(SyncPort surface, SyncPort core)
+		define surface core
 	end
 
-	const data int no_connection = 0
-	const data int left = 1
-	const data int right = 2
+	connector type DisconnectCoreAndSurface(SyncPort surface, SyncPort core)
+        define surface core
+    end
 
 	atom type SURFACES()
-		// -1 if surface inactive/disable
-		// 0 if surface active but not connected
-		// positive (must be define) if active and connected
-		// data int connect
-
-		//data bool PowerOnOff
-		data int surface_seed = 0
-		data int surface_leaf = 0
+		data bool left = false
+		data bool right = false
 
 		// SEED connection and deconnection (output signal in parent block)
-		export port SyncPort SEED_CONNECT_LEFT()
-		export port SyncPort SEED_CONNECT_RIGHT()
-		export port SyncPort SEED_DISCONNECT_RIGHT()
-        export port SyncPort SEED_DISCONNECT_LEFT()
+		export port SyncPort CONNECT_LEFT()
+        export port SyncPort DISCONNECT_LEFT()
+		export port SyncPort CONNECT_RIGHT()
+		export port SyncPort DISCONNECT_RIGHT()
 
-		// When everything is disconnected need it to turn off everything
-		export port SyncPort SEED_LAST_DISCONNECT()
+		export port SyncPort CONNECT_CORE()
 
-		// LEAF connection and deconnection (input signal in child block)
-		export port SyncPort LEAF_CONNECT_LEFT()
-		export port SyncPort LEAF_CONNECT_RIGHT()
-		export port SyncPort LEAF_DISCONNECT_RIGHT()
-        export port SyncPort LEAF_DISCONNECT_LEFT()
-
-		// My own test (Titouan)
-		//export port SyncPort connectSurface()
-		//export port SyncPort disconnectSurface()
-		//export port SyncPort initialize()
-
+        //possible states for all surface ports
 		place DISCONNECTED, CONNECTED
 		initial to DISCONNECTED
 
-		// SEED instruction for left and right surface when state change
-		on SEED_CONNECT_LEFT from DISCONNECTED to CONNECTED 
-			provided( ( left & surface_leaf ) == 0 && ( left & surface_seed ) == 0 ) 
+		// SURFACE instruction for left and right surface when state change
+		on CONNECT_LEFT from DISCONNECTED to CONNECTED
+			provided( !left )
 				do {
-					surface_seed = surface_seed | left; 
-					what_connected(surface_seed, surface_leaf);
+				    printf("\033[32m[Output]:\033[0m Left has been connected\n");
+					left = !left;
 				}
-		on SEED_CONNECT_RIGHT from DISCONNECTED to CONNECTED 
-			provided( ( right & surface_leaf ) == 0 && ( right & surface_seed ) == 0 )
+		on CONNECT_RIGHT from DISCONNECTED to CONNECTED 
+			provided( !right )
 				do {
-					surface_seed = surface_seed | right;
-					what_connected(surface_seed, surface_leaf);
+					printf("\033[32m[Output]:\033[0m Right has been connected\n");
+					right = !right;
 				}
 
-		// SEED instruction when disconnected
-		on SEED_LAST_DISCONNECT from CONNECTED to DISCONNECTED 
-			provided( surface_seed == 1 || surface_seed == 2 )
+		// SURFACE instruction when disconnected
+		on DISCONNECT_LEFT from CONNECTED to DISCONNECTED
+			provided( left )
 				do {
-					printf("\033[32m[Output]:\033[0m Last seed has been disconnected\n");
-					surface_seed = 0;
-					what_connected(surface_seed, surface_leaf);
+					printf("\033[32m[Output]:\033[0m Left has been disconnected\n");
+					left = !left ;
 				}
-      
-	  	// LEAF instruction for left and right surface when state change
-	  	on LEAF_CONNECT_LEFT from DISCONNECTED to CONNECTED 
-		  	provided( ( left & surface_leaf ) == 0 && ( left & surface_seed ) == 0)
+
+      	on DISCONNECT_RIGHT from CONNECTED to DISCONNECTED
+		  	provided( right )
 				do {
-					surface_leaf = surface_leaf | left;
-					what_connected(surface_seed, surface_leaf);
+					printf("\033[32m[Output]:\033[0m Right has been disconnected\n");
+					right = !right;
 				}
-      	on LEAF_CONNECT_RIGHT from DISCONNECTED to CONNECTED 
-		  	provided( ( right & surface_leaf ) == 0 && ( right & surface_seed ) == 0 )
-				do {
-					surface_leaf = surface_leaf | right;
-					what_connected(surface_seed, surface_leaf);
-				}
-		on LEAF_DISCONNECT_LEFT from CONNECTED to DISCONNECTED
-			provided( (left & surface_leaf) != 0 )
-				do {
-					surface_leaf = surface_leaf - left;
-					what_connected(surface_seed, surface_leaf);
-				}
-        on LEAF_DISCONNECT_RIGHT from CONNECTED to DISCONNECTED 
-			provided( ( right & surface_leaf ) != 0 ) 
-				do {
-					surface_leaf=surface_leaf - right;
-					what_connected(surface_seed, surface_leaf);
-				}
-        
+
+		on CONNECT_CORE from CONNECTED to DISCONNECTED
+		    do {
+		        printf("\033[32m[Output]:\033[0m Surfaces connected to core\n");
+		    }
+		on CONNECT_CORE from DISCONNECTED to CONNECTED
+            do {
+                printf("\033[32m[Output]:\033[0m Surfaces disconnected to core\n");
+            }
+
 
 	  	// Titouan test
 		//on connectSurface from CONNECT to DISCONNECT do {connect = mcu_id;}
@@ -108,50 +79,40 @@ package SimpleBlinky
 		//on initialize from CONNECT to DISCONNECT provided(connect > 0) do {connect = -1;}
 	end
 
-	atom type MCU(int id)
-		data bool MCUSwitcher // True: MCU turn on; False: MCU turn off
+	atom type CORE(int id)
+		export port SyncPort CORE_ASSEMBLE()
+    	export port SyncPort CORE_DISASSEMBLE()
 
-		// MCU port
-		export port SyncPort SWITCH_ON()
-    	export port SyncPort SWITCH_OFF()
+		place ASSEMBLED, DISASSEMBLED
+		initial to DISASSEMBLED
 
-		place OFF, ON
-		initial to OFF do {
-			printf("\033[32mBlock %d\033[0m initialise to OFF\n", id);
-			MCUSwitcher = false;
-		}
+		on CORE_ASSEMBLE from DISASSEMBLED to ASSEMBLED
+            do {
+                printf("\033[32mBlock %d\033[0m assembled", id);
+            }
 
-		on SWITCH_ON from OFF to ON do{
-			MCUSwitcher = true;
-			printf("\033[32mBlock %d\033[0m turn on", id);
-		}
-
-		on SWITCH_OFF from ON to OFF do{
-			MCUSwitcher = false;
-			printf("\033[32mBlock %d\033[0m turn off", id);
+		on CORE_DISASSEMBLE from ASSEMBLED to DISASSEMBLED do{
+			printf("\033[32mBlock %d\033[0m disassembled", id);
 		}
 
 	end
 
 
 	compound type SYS()
-		component MCU m(1)
+		component CORE c(1)
 		component SURFACES s()
 
-		// SEED connector
-		connector ConnectMCUandSurface seed_connect_block_left(s.SEED_CONNECT_LEFT, m.SWITCH_ON)
-		connector ConnectMCUandSurface seed_connect_block_right(s.SEED_CONNECT_RIGHT, m.SWITCH_ON)
-		connector InternalConnection seed_disconnect_block_right(s.SEED_DISCONNECT_RIGHT)
-        connector InternalConnection seed_disconnect_block_left(s.SEED_DISCONNECT_LEFT)
-		
-		// LEAF connector
-		connector InternalConnection leaf_connect_block_left(s.LEAF_CONNECT_LEFT)
-		connector InternalConnection leaf_connect_block_right(s.LEAF_CONNECT_RIGHT)
-		connector InternalConnection leaf_disconnect_block_right(s.LEAF_DISCONNECT_RIGHT)
-		connector InternalConnection leaf_disconnect_block_left(s.LEAF_DISCONNECT_LEFT)
-		
-		// TURN OFF block
-		connector ConnectMCUandSurface seed_last_disconnect_block_all(s.SEED_LAST_DISCONNECT, m.SWITCH_OFF)
+		component CORE c2(2)
+		component SURFACES s2()
+
+		connector ConnectCoreAndSurface assemble_block_1(s.CONNECT_CORE, c.CORE_ASSEMBLE)
+		connector ConnectCoreAndSurface assemble_block_2(s2.CONNECT_CORE, c2.CORE_ASSEMBLE)
+		connector Connection connect_block_1_2(s.CONNECT_RIGHT, s2.CONNECT_LEFT)
+
+		connector Connection disconnect_block_1_2(s.DISCONNECT_RIGHT, s2.DISCONNECT_LEFT)
+		connector DisconnectCoreAndSurface disassemble_block_1(s.CONNECT_CORE, c.CORE_DISASSEMBLE)
+		connector DisconnectCoreAndSurface disassemble_block_2(s2.CONNECT_CORE, c2.CORE_DISASSEMBLE)
+
 	end
 
 end
