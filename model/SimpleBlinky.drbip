@@ -22,10 +22,13 @@ import from "SimpleBlinky.cpp" {
 motif MotifSimple<SimpleBlinkyMap> {
     rule interaction BlockInitializer(MCU mcu, SURFACES s)
     when(true) {
-        new switchElementOnOff(s, mcu)
+        new ConnectMCUandSurface(s, mcu)
     }
 }
 
 initializer {
     b1 = new MotifSimple()
+
+    mcu = new MCU(1)
+    surfaces = new SURFACES()
 }

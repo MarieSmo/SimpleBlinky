@@ -5,14 +5,13 @@ package SimpleBlinky
 	extern function int what_connected (const int,const int)
 	extern function const string connection (int)
 
-
 	port type SyncPort()
 
 	connector type InternalConnection(SyncPort elem)
 		define elem
 	end
 
-	connector type switchElementOnOff(SyncPort elem, SyncPort switcher)
+	connector type ConnectMCUandSurface(SyncPort elem, SyncPort switcher)
 		define elem switcher
 	end
 
@@ -140,8 +139,8 @@ package SimpleBlinky
 		component SURFACES s()
 
 		// SEED connector
-		connector switchElementOnOff seed_connect_block_left(s.SEED_CONNECT_LEFT, m.SWITCH_ON)
-		connector switchElementOnOff seed_connect_block_right(s.SEED_CONNECT_RIGHT, m.SWITCH_ON)
+		connector ConnectMCUandSurface seed_connect_block_left(s.SEED_CONNECT_LEFT, m.SWITCH_ON)
+		connector ConnectMCUandSurface seed_connect_block_right(s.SEED_CONNECT_RIGHT, m.SWITCH_ON)
 		connector InternalConnection seed_disconnect_block_right(s.SEED_DISCONNECT_RIGHT)
         connector InternalConnection seed_disconnect_block_left(s.SEED_DISCONNECT_LEFT)
 		
@@ -152,7 +151,7 @@ package SimpleBlinky
 		connector InternalConnection leaf_disconnect_block_left(s.LEAF_DISCONNECT_LEFT)
 		
 		// TURN OFF block
-		connector switchElementOnOff seed_last_disconnect_block_all(s.SEED_LAST_DISCONNECT, m.SWITCH_OFF)
+		connector ConnectMCUandSurface seed_last_disconnect_block_all(s.SEED_LAST_DISCONNECT, m.SWITCH_OFF)
 	end
 
 end

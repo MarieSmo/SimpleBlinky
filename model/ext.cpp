@@ -1,20 +1,15 @@
+#ifndef EXT
+#define EXT
+
+using namespace std;
 #include "stdio.h"
-
 #include <iostream>
-
-
-#define dir_modulus 63
-
-typedef enum {
-	left = 1,
-	right = 2
-} dir_type;
-
+#include<cstdlib>
 
 const char* connection (int connection_surface) {
 	switch (connection_surface) {
-		case left: return "Left ";
-		case right: return "Right ";
+		case 1: return "Left ";
+		case 2: return "Right ";
 		default: return "No_connection ";
 	}
 }
@@ -48,3 +43,4 @@ int what_connected (const int seed_check, const int leaf_check){
 	printf("\n");
 	return 1;
 }
+#endif
