@@ -8,7 +8,7 @@ import from "SimpleBlinky.cpp" {
     //condition NodeSurfaceRight(SURFACES)
 
     structure SimpleBlinkyMap {
-        bool isConnected(Node, Node)
+        bool isAssembled(Node, Node)
     }
 
     structure BBMap {
@@ -19,9 +19,9 @@ import from "SimpleBlinky.cpp" {
 }
 
 motif MotifSimple<SimpleBlinkyMap> {
-    rule interaction BlockInitializer(SURFACES s, CORE c)
-    when(true, S.isConnected(@c, @s) ){
-        new ConnectCoreAndSurface(s, c)
+    rule interaction BlockInitializer(CORE c, SURFACES s)
+    when(!S.isAssembled(@c, @s) ){
+        new ConnectCoreAndSurface(c, s)
     }
 }
 
@@ -30,4 +30,5 @@ initializer {
 
     core = new CORE(1)
     surfaces = new SURFACES()
+    surfaces2 = new SURFACES()
 }

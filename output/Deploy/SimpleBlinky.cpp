@@ -22,8 +22,8 @@ namespace reconfigure {
         Node * core;
         Node * surfaces;
 
-        bool isConnected(Node * core, Node * surfaces) {
-            return true;
+        bool isAssembled(Node * core, Node * surfaces) {
+            return surfaces->_m__isAssembled && core->_m__isAssembled;
         }
 
         /*SimpleBlinkyMap(AT__MCU* i_mcu, AT__SURFACE* i_surface_left, AT__SURFACE* i_surface_right) {

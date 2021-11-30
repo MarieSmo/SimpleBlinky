@@ -143,36 +143,35 @@ namespace reconfigure {
         bool applyAll() {
             bool applied = false;
             cleanup(connectors);
-            for(auto i_arg_s = motif->comps.S_SURFACES.begin(); i_arg_s != motif->comps.S_SURFACES.end(); ++i_arg_s ){
-                auto v_s = *i_arg_s;
-                if(!(true)) continue;
-                for(auto i_arg_c = motif->comps.S_CORE.begin(); i_arg_c != motif->comps.S_CORE.end(); ++i_arg_c ){
-                    auto v_c = *i_arg_c;
-                    if(!(motif->structure.isConnected(motif->address((AtomType*)v_c), motif->address((AtomType*)v_s)))) continue;
-                    apply(v_s,v_c);
+            for(auto i_arg_c = motif->comps.S_CORE.begin(); i_arg_c != motif->comps.S_CORE.end(); ++i_arg_c ){
+                auto v_c = *i_arg_c;
+                if(!(!motif->structure.isAssembled(motif->address((AtomType*)v_c), motif->address((AtomType*)v_s)))) continue;
+                for(auto i_arg_s = motif->comps.S_SURFACES.begin(); i_arg_s != motif->comps.S_SURFACES.end(); ++i_arg_s ){
+                    auto v_s = *i_arg_s;
+                    apply(v_c,v_s);
                     applied = true;
                 }
             }
             return applied;
         }
-        void apply(AT__SURFACES* s, AT__CORE* c){
-            Interaction * myConnector = new ConnectCoreAndSurface(s, c);
+        void apply(AT__CORE* c, AT__SURFACES* s){
+            Interaction * myConnector = new ConnectCoreAndSurface(c, s);
             connectors->insert(myConnector);
             #ifndef PERFMODE
             cout << "<TRACE> <DRBIP> apply ";
             tracename(cout);
             cout << " with";
             cout << " ";
-            s->tracename(cout);
-            cout << " ";
             c->tracename(cout);
+            cout << " ";
+            s->tracename(cout);
             cout << endl;
             cout << "<TRACE> <DRBIP> spawn interaction ";
             myConnector->tracename(cout);
             cout << " ";
-            s->tracename(cout);
-            cout << " ";
             c->tracename(cout);
+            cout << " ";
+            s->tracename(cout);
             cout << endl;
             #endif
             #ifdef PERFMODE
@@ -241,5 +240,6 @@ namespace reconfigure {
         MotifSimple* b1=spawnMotifSimple();
         AT__CORE* core=spawnCORE(1);
         AT__SURFACES* surfaces=spawnSURFACES();
+        AT__SURFACES* surfaces2=spawnSURFACES();
     }
 }
