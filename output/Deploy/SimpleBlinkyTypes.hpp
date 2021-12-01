@@ -84,20 +84,20 @@ namespace SimpleBlinky {
 			
 			
 			
-			this->_transition__CORE_ASSEMBLE = 0;
-			
-			if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__isAssembled)) {
-			  assert(this->_transition__CORE_ASSEMBLE == 0);
-			
-			  this->_transition__CORE_ASSEMBLE = 1;
-			}
-			
 			this->_transition__CORE_DISASSEMBLE = 0;
 			
 			if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__isAssembled))) {
 			  assert(this->_transition__CORE_DISASSEMBLE == 0);
 			
 			  this->_transition__CORE_DISASSEMBLE = 2;
+			}
+			
+			this->_transition__CORE_ASSEMBLE = 0;
+			
+			if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__isAssembled)) {
+			  assert(this->_transition__CORE_ASSEMBLE == 0);
+			
+			  this->_transition__CORE_ASSEMBLE = 1;
 			}
 	
 			return NO_ERROR;
@@ -131,20 +131,20 @@ namespace SimpleBlinky {
 		      assert(false);
 		  }
 		  
-		  this->_transition__CORE_ASSEMBLE = 0;
-		  
-		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__isAssembled)) {
-		    assert(this->_transition__CORE_ASSEMBLE == 0);
-		  
-		    this->_transition__CORE_ASSEMBLE = 1;
-		  }
-		  
 		  this->_transition__CORE_DISASSEMBLE = 0;
 		  
 		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__isAssembled))) {
 		    assert(this->_transition__CORE_DISASSEMBLE == 0);
 		  
 		    this->_transition__CORE_DISASSEMBLE = 2;
+		  }
+		  
+		  this->_transition__CORE_ASSEMBLE = 0;
+		  
+		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__isAssembled)) {
+		    assert(this->_transition__CORE_ASSEMBLE == 0);
+		  
+		    this->_transition__CORE_ASSEMBLE = 1;
 		  }
 		
 		  return error;
@@ -177,20 +177,20 @@ namespace SimpleBlinky {
 		      assert(false);
 		  }
 		  
-		  this->_transition__CORE_ASSEMBLE = 0;
-		  
-		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__isAssembled)) {
-		    assert(this->_transition__CORE_ASSEMBLE == 0);
-		  
-		    this->_transition__CORE_ASSEMBLE = 1;
-		  }
-		  
 		  this->_transition__CORE_DISASSEMBLE = 0;
 		  
 		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__isAssembled))) {
 		    assert(this->_transition__CORE_DISASSEMBLE == 0);
 		  
 		    this->_transition__CORE_DISASSEMBLE = 2;
+		  }
+		  
+		  this->_transition__CORE_ASSEMBLE = 0;
+		  
+		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__isAssembled)) {
+		    assert(this->_transition__CORE_ASSEMBLE == 0);
+		  
+		    this->_transition__CORE_ASSEMBLE = 1;
 		  }
 		
 		  return error;
@@ -488,14 +488,6 @@ namespace SimpleBlinky {
 			
 			
 			
-			this->_transition__CONNECT_FRONT = 0;
-			
-			if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__front))) {
-			  assert(this->_transition__CONNECT_FRONT == 0);
-			
-			  this->_transition__CONNECT_FRONT = 5;
-			}
-			
 			this->_transition__CONNECT_CORE = 0;
 			
 			if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__isAssembled)) {
@@ -514,68 +506,12 @@ namespace SimpleBlinky {
 			  this->_transition__CONNECT_CORE = 14;
 			}
 			
-			this->_transition__CONNECT_BACK = 0;
-			
-			if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__back))) {
-			  assert(this->_transition__CONNECT_BACK == 0);
-			
-			  this->_transition__CONNECT_BACK = 6;
-			}
-			
-			this->_transition__DISCONNECT_BACK = 0;
-			
-			if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__back)) {
-			  assert(this->_transition__DISCONNECT_BACK == 0);
-			
-			  this->_transition__DISCONNECT_BACK = 12;
-			}
-			
-			this->_transition__DISCONNECT_LEFT = 0;
-			
-			if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__left)) {
-			  assert(this->_transition__DISCONNECT_LEFT == 0);
-			
-			  this->_transition__DISCONNECT_LEFT = 7;
-			}
-			
-			this->_transition__CONNECT_TOP = 0;
-			
-			if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__top))) {
-			  assert(this->_transition__CONNECT_TOP == 0);
-			
-			  this->_transition__CONNECT_TOP = 3;
-			}
-			
-			this->_transition__DISCONNECT_FRONT = 0;
-			
-			if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__front)) {
-			  assert(this->_transition__DISCONNECT_FRONT == 0);
-			
-			  this->_transition__DISCONNECT_FRONT = 11;
-			}
-			
-			this->_transition__CONNECT_BOTTOM = 0;
-			
-			if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__bottom))) {
-			  assert(this->_transition__CONNECT_BOTTOM == 0);
-			
-			  this->_transition__CONNECT_BOTTOM = 4;
-			}
-			
 			this->_transition__DISCONNECT_RIGHT = 0;
 			
 			if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__right)) {
 			  assert(this->_transition__DISCONNECT_RIGHT == 0);
 			
 			  this->_transition__DISCONNECT_RIGHT = 8;
-			}
-			
-			this->_transition__CONNECT_RIGHT = 0;
-			
-			if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__right))) {
-			  assert(this->_transition__CONNECT_RIGHT == 0);
-			
-			  this->_transition__CONNECT_RIGHT = 2;
 			}
 			
 			this->_transition__DISCONNECT_TOP = 0;
@@ -586,6 +522,14 @@ namespace SimpleBlinky {
 			  this->_transition__DISCONNECT_TOP = 9;
 			}
 			
+			this->_transition__CONNECT_FRONT = 0;
+			
+			if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__front))) {
+			  assert(this->_transition__CONNECT_FRONT == 0);
+			
+			  this->_transition__CONNECT_FRONT = 5;
+			}
+			
 			this->_transition__CONNECT_LEFT = 0;
 			
 			if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__left))) {
@@ -594,12 +538,68 @@ namespace SimpleBlinky {
 			  this->_transition__CONNECT_LEFT = 1;
 			}
 			
+			this->_transition__CONNECT_BACK = 0;
+			
+			if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__back))) {
+			  assert(this->_transition__CONNECT_BACK == 0);
+			
+			  this->_transition__CONNECT_BACK = 6;
+			}
+			
 			this->_transition__DISCONNECT_BOTTOM = 0;
 			
 			if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__bottom)) {
 			  assert(this->_transition__DISCONNECT_BOTTOM == 0);
 			
 			  this->_transition__DISCONNECT_BOTTOM = 10;
+			}
+			
+			this->_transition__DISCONNECT_LEFT = 0;
+			
+			if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__left)) {
+			  assert(this->_transition__DISCONNECT_LEFT == 0);
+			
+			  this->_transition__DISCONNECT_LEFT = 7;
+			}
+			
+			this->_transition__CONNECT_BOTTOM = 0;
+			
+			if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__bottom))) {
+			  assert(this->_transition__CONNECT_BOTTOM == 0);
+			
+			  this->_transition__CONNECT_BOTTOM = 4;
+			}
+			
+			this->_transition__CONNECT_RIGHT = 0;
+			
+			if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__right))) {
+			  assert(this->_transition__CONNECT_RIGHT == 0);
+			
+			  this->_transition__CONNECT_RIGHT = 2;
+			}
+			
+			this->_transition__DISCONNECT_FRONT = 0;
+			
+			if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__front)) {
+			  assert(this->_transition__DISCONNECT_FRONT == 0);
+			
+			  this->_transition__DISCONNECT_FRONT = 11;
+			}
+			
+			this->_transition__CONNECT_TOP = 0;
+			
+			if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__top))) {
+			  assert(this->_transition__CONNECT_TOP == 0);
+			
+			  this->_transition__CONNECT_TOP = 3;
+			}
+			
+			this->_transition__DISCONNECT_BACK = 0;
+			
+			if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__back)) {
+			  assert(this->_transition__DISCONNECT_BACK == 0);
+			
+			  this->_transition__DISCONNECT_BACK = 12;
 			}
 	
 			return NO_ERROR;
@@ -633,14 +633,6 @@ namespace SimpleBlinky {
 		      assert(false);
 		  }
 		  
-		  this->_transition__CONNECT_FRONT = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__front))) {
-		    assert(this->_transition__CONNECT_FRONT == 0);
-		  
-		    this->_transition__CONNECT_FRONT = 5;
-		  }
-		  
 		  this->_transition__CONNECT_CORE = 0;
 		  
 		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__isAssembled)) {
@@ -659,68 +651,12 @@ namespace SimpleBlinky {
 		    this->_transition__CONNECT_CORE = 14;
 		  }
 		  
-		  this->_transition__CONNECT_BACK = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__back))) {
-		    assert(this->_transition__CONNECT_BACK == 0);
-		  
-		    this->_transition__CONNECT_BACK = 6;
-		  }
-		  
-		  this->_transition__DISCONNECT_BACK = 0;
-		  
-		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__back)) {
-		    assert(this->_transition__DISCONNECT_BACK == 0);
-		  
-		    this->_transition__DISCONNECT_BACK = 12;
-		  }
-		  
-		  this->_transition__DISCONNECT_LEFT = 0;
-		  
-		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__left)) {
-		    assert(this->_transition__DISCONNECT_LEFT == 0);
-		  
-		    this->_transition__DISCONNECT_LEFT = 7;
-		  }
-		  
-		  this->_transition__CONNECT_TOP = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__top))) {
-		    assert(this->_transition__CONNECT_TOP == 0);
-		  
-		    this->_transition__CONNECT_TOP = 3;
-		  }
-		  
-		  this->_transition__DISCONNECT_FRONT = 0;
-		  
-		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__front)) {
-		    assert(this->_transition__DISCONNECT_FRONT == 0);
-		  
-		    this->_transition__DISCONNECT_FRONT = 11;
-		  }
-		  
-		  this->_transition__CONNECT_BOTTOM = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__bottom))) {
-		    assert(this->_transition__CONNECT_BOTTOM == 0);
-		  
-		    this->_transition__CONNECT_BOTTOM = 4;
-		  }
-		  
 		  this->_transition__DISCONNECT_RIGHT = 0;
 		  
 		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__right)) {
 		    assert(this->_transition__DISCONNECT_RIGHT == 0);
 		  
 		    this->_transition__DISCONNECT_RIGHT = 8;
-		  }
-		  
-		  this->_transition__CONNECT_RIGHT = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__right))) {
-		    assert(this->_transition__CONNECT_RIGHT == 0);
-		  
-		    this->_transition__CONNECT_RIGHT = 2;
 		  }
 		  
 		  this->_transition__DISCONNECT_TOP = 0;
@@ -731,6 +667,14 @@ namespace SimpleBlinky {
 		    this->_transition__DISCONNECT_TOP = 9;
 		  }
 		  
+		  this->_transition__CONNECT_FRONT = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__front))) {
+		    assert(this->_transition__CONNECT_FRONT == 0);
+		  
+		    this->_transition__CONNECT_FRONT = 5;
+		  }
+		  
 		  this->_transition__CONNECT_LEFT = 0;
 		  
 		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__left))) {
@@ -739,12 +683,68 @@ namespace SimpleBlinky {
 		    this->_transition__CONNECT_LEFT = 1;
 		  }
 		  
+		  this->_transition__CONNECT_BACK = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__back))) {
+		    assert(this->_transition__CONNECT_BACK == 0);
+		  
+		    this->_transition__CONNECT_BACK = 6;
+		  }
+		  
 		  this->_transition__DISCONNECT_BOTTOM = 0;
 		  
 		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__bottom)) {
 		    assert(this->_transition__DISCONNECT_BOTTOM == 0);
 		  
 		    this->_transition__DISCONNECT_BOTTOM = 10;
+		  }
+		  
+		  this->_transition__DISCONNECT_LEFT = 0;
+		  
+		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__left)) {
+		    assert(this->_transition__DISCONNECT_LEFT == 0);
+		  
+		    this->_transition__DISCONNECT_LEFT = 7;
+		  }
+		  
+		  this->_transition__CONNECT_BOTTOM = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__bottom))) {
+		    assert(this->_transition__CONNECT_BOTTOM == 0);
+		  
+		    this->_transition__CONNECT_BOTTOM = 4;
+		  }
+		  
+		  this->_transition__CONNECT_RIGHT = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__right))) {
+		    assert(this->_transition__CONNECT_RIGHT == 0);
+		  
+		    this->_transition__CONNECT_RIGHT = 2;
+		  }
+		  
+		  this->_transition__DISCONNECT_FRONT = 0;
+		  
+		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__front)) {
+		    assert(this->_transition__DISCONNECT_FRONT == 0);
+		  
+		    this->_transition__DISCONNECT_FRONT = 11;
+		  }
+		  
+		  this->_transition__CONNECT_TOP = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__top))) {
+		    assert(this->_transition__CONNECT_TOP == 0);
+		  
+		    this->_transition__CONNECT_TOP = 3;
+		  }
+		  
+		  this->_transition__DISCONNECT_BACK = 0;
+		  
+		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__back)) {
+		    assert(this->_transition__DISCONNECT_BACK == 0);
+		  
+		    this->_transition__DISCONNECT_BACK = 12;
 		  }
 		
 		  return error;
@@ -777,14 +777,6 @@ namespace SimpleBlinky {
 		      assert(false);
 		  }
 		  
-		  this->_transition__CONNECT_FRONT = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__front))) {
-		    assert(this->_transition__CONNECT_FRONT == 0);
-		  
-		    this->_transition__CONNECT_FRONT = 5;
-		  }
-		  
 		  this->_transition__CONNECT_CORE = 0;
 		  
 		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__isAssembled)) {
@@ -803,68 +795,12 @@ namespace SimpleBlinky {
 		    this->_transition__CONNECT_CORE = 14;
 		  }
 		  
-		  this->_transition__CONNECT_BACK = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__back))) {
-		    assert(this->_transition__CONNECT_BACK == 0);
-		  
-		    this->_transition__CONNECT_BACK = 6;
-		  }
-		  
-		  this->_transition__DISCONNECT_BACK = 0;
-		  
-		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__back)) {
-		    assert(this->_transition__DISCONNECT_BACK == 0);
-		  
-		    this->_transition__DISCONNECT_BACK = 12;
-		  }
-		  
-		  this->_transition__DISCONNECT_LEFT = 0;
-		  
-		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__left)) {
-		    assert(this->_transition__DISCONNECT_LEFT == 0);
-		  
-		    this->_transition__DISCONNECT_LEFT = 7;
-		  }
-		  
-		  this->_transition__CONNECT_TOP = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__top))) {
-		    assert(this->_transition__CONNECT_TOP == 0);
-		  
-		    this->_transition__CONNECT_TOP = 3;
-		  }
-		  
-		  this->_transition__DISCONNECT_FRONT = 0;
-		  
-		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__front)) {
-		    assert(this->_transition__DISCONNECT_FRONT == 0);
-		  
-		    this->_transition__DISCONNECT_FRONT = 11;
-		  }
-		  
-		  this->_transition__CONNECT_BOTTOM = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__bottom))) {
-		    assert(this->_transition__CONNECT_BOTTOM == 0);
-		  
-		    this->_transition__CONNECT_BOTTOM = 4;
-		  }
-		  
 		  this->_transition__DISCONNECT_RIGHT = 0;
 		  
 		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__right)) {
 		    assert(this->_transition__DISCONNECT_RIGHT == 0);
 		  
 		    this->_transition__DISCONNECT_RIGHT = 8;
-		  }
-		  
-		  this->_transition__CONNECT_RIGHT = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__right))) {
-		    assert(this->_transition__CONNECT_RIGHT == 0);
-		  
-		    this->_transition__CONNECT_RIGHT = 2;
 		  }
 		  
 		  this->_transition__DISCONNECT_TOP = 0;
@@ -875,6 +811,14 @@ namespace SimpleBlinky {
 		    this->_transition__DISCONNECT_TOP = 9;
 		  }
 		  
+		  this->_transition__CONNECT_FRONT = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__front))) {
+		    assert(this->_transition__CONNECT_FRONT == 0);
+		  
+		    this->_transition__CONNECT_FRONT = 5;
+		  }
+		  
 		  this->_transition__CONNECT_LEFT = 0;
 		  
 		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__left))) {
@@ -883,12 +827,68 @@ namespace SimpleBlinky {
 		    this->_transition__CONNECT_LEFT = 1;
 		  }
 		  
+		  this->_transition__CONNECT_BACK = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__back))) {
+		    assert(this->_transition__CONNECT_BACK == 0);
+		  
+		    this->_transition__CONNECT_BACK = 6;
+		  }
+		  
 		  this->_transition__DISCONNECT_BOTTOM = 0;
 		  
 		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__bottom)) {
 		    assert(this->_transition__DISCONNECT_BOTTOM == 0);
 		  
 		    this->_transition__DISCONNECT_BOTTOM = 10;
+		  }
+		  
+		  this->_transition__DISCONNECT_LEFT = 0;
+		  
+		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__left)) {
+		    assert(this->_transition__DISCONNECT_LEFT == 0);
+		  
+		    this->_transition__DISCONNECT_LEFT = 7;
+		  }
+		  
+		  this->_transition__CONNECT_BOTTOM = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__bottom))) {
+		    assert(this->_transition__CONNECT_BOTTOM == 0);
+		  
+		    this->_transition__CONNECT_BOTTOM = 4;
+		  }
+		  
+		  this->_transition__CONNECT_RIGHT = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__right))) {
+		    assert(this->_transition__CONNECT_RIGHT == 0);
+		  
+		    this->_transition__CONNECT_RIGHT = 2;
+		  }
+		  
+		  this->_transition__DISCONNECT_FRONT = 0;
+		  
+		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__front)) {
+		    assert(this->_transition__DISCONNECT_FRONT == 0);
+		  
+		    this->_transition__DISCONNECT_FRONT = 11;
+		  }
+		  
+		  this->_transition__CONNECT_TOP = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__top))) {
+		    assert(this->_transition__CONNECT_TOP == 0);
+		  
+		    this->_transition__CONNECT_TOP = 3;
+		  }
+		  
+		  this->_transition__DISCONNECT_BACK = 0;
+		  
+		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__back)) {
+		    assert(this->_transition__DISCONNECT_BACK == 0);
+		  
+		    this->_transition__DISCONNECT_BACK = 12;
 		  }
 		
 		  return error;
@@ -921,14 +921,6 @@ namespace SimpleBlinky {
 		      assert(false);
 		  }
 		  
-		  this->_transition__CONNECT_FRONT = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__front))) {
-		    assert(this->_transition__CONNECT_FRONT == 0);
-		  
-		    this->_transition__CONNECT_FRONT = 5;
-		  }
-		  
 		  this->_transition__CONNECT_CORE = 0;
 		  
 		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__isAssembled)) {
@@ -947,68 +939,12 @@ namespace SimpleBlinky {
 		    this->_transition__CONNECT_CORE = 14;
 		  }
 		  
-		  this->_transition__CONNECT_BACK = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__back))) {
-		    assert(this->_transition__CONNECT_BACK == 0);
-		  
-		    this->_transition__CONNECT_BACK = 6;
-		  }
-		  
-		  this->_transition__DISCONNECT_BACK = 0;
-		  
-		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__back)) {
-		    assert(this->_transition__DISCONNECT_BACK == 0);
-		  
-		    this->_transition__DISCONNECT_BACK = 12;
-		  }
-		  
-		  this->_transition__DISCONNECT_LEFT = 0;
-		  
-		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__left)) {
-		    assert(this->_transition__DISCONNECT_LEFT == 0);
-		  
-		    this->_transition__DISCONNECT_LEFT = 7;
-		  }
-		  
-		  this->_transition__CONNECT_TOP = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__top))) {
-		    assert(this->_transition__CONNECT_TOP == 0);
-		  
-		    this->_transition__CONNECT_TOP = 3;
-		  }
-		  
-		  this->_transition__DISCONNECT_FRONT = 0;
-		  
-		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__front)) {
-		    assert(this->_transition__DISCONNECT_FRONT == 0);
-		  
-		    this->_transition__DISCONNECT_FRONT = 11;
-		  }
-		  
-		  this->_transition__CONNECT_BOTTOM = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__bottom))) {
-		    assert(this->_transition__CONNECT_BOTTOM == 0);
-		  
-		    this->_transition__CONNECT_BOTTOM = 4;
-		  }
-		  
 		  this->_transition__DISCONNECT_RIGHT = 0;
 		  
 		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__right)) {
 		    assert(this->_transition__DISCONNECT_RIGHT == 0);
 		  
 		    this->_transition__DISCONNECT_RIGHT = 8;
-		  }
-		  
-		  this->_transition__CONNECT_RIGHT = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__right))) {
-		    assert(this->_transition__CONNECT_RIGHT == 0);
-		  
-		    this->_transition__CONNECT_RIGHT = 2;
 		  }
 		  
 		  this->_transition__DISCONNECT_TOP = 0;
@@ -1019,6 +955,14 @@ namespace SimpleBlinky {
 		    this->_transition__DISCONNECT_TOP = 9;
 		  }
 		  
+		  this->_transition__CONNECT_FRONT = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__front))) {
+		    assert(this->_transition__CONNECT_FRONT == 0);
+		  
+		    this->_transition__CONNECT_FRONT = 5;
+		  }
+		  
 		  this->_transition__CONNECT_LEFT = 0;
 		  
 		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__left))) {
@@ -1027,12 +971,68 @@ namespace SimpleBlinky {
 		    this->_transition__CONNECT_LEFT = 1;
 		  }
 		  
+		  this->_transition__CONNECT_BACK = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__back))) {
+		    assert(this->_transition__CONNECT_BACK == 0);
+		  
+		    this->_transition__CONNECT_BACK = 6;
+		  }
+		  
 		  this->_transition__DISCONNECT_BOTTOM = 0;
 		  
 		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__bottom)) {
 		    assert(this->_transition__DISCONNECT_BOTTOM == 0);
 		  
 		    this->_transition__DISCONNECT_BOTTOM = 10;
+		  }
+		  
+		  this->_transition__DISCONNECT_LEFT = 0;
+		  
+		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__left)) {
+		    assert(this->_transition__DISCONNECT_LEFT == 0);
+		  
+		    this->_transition__DISCONNECT_LEFT = 7;
+		  }
+		  
+		  this->_transition__CONNECT_BOTTOM = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__bottom))) {
+		    assert(this->_transition__CONNECT_BOTTOM == 0);
+		  
+		    this->_transition__CONNECT_BOTTOM = 4;
+		  }
+		  
+		  this->_transition__CONNECT_RIGHT = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__right))) {
+		    assert(this->_transition__CONNECT_RIGHT == 0);
+		  
+		    this->_transition__CONNECT_RIGHT = 2;
+		  }
+		  
+		  this->_transition__DISCONNECT_FRONT = 0;
+		  
+		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__front)) {
+		    assert(this->_transition__DISCONNECT_FRONT == 0);
+		  
+		    this->_transition__DISCONNECT_FRONT = 11;
+		  }
+		  
+		  this->_transition__CONNECT_TOP = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__top))) {
+		    assert(this->_transition__CONNECT_TOP == 0);
+		  
+		    this->_transition__CONNECT_TOP = 3;
+		  }
+		  
+		  this->_transition__DISCONNECT_BACK = 0;
+		  
+		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__back)) {
+		    assert(this->_transition__DISCONNECT_BACK == 0);
+		  
+		    this->_transition__DISCONNECT_BACK = 12;
 		  }
 		
 		  return error;
@@ -1065,14 +1065,6 @@ namespace SimpleBlinky {
 		      assert(false);
 		  }
 		  
-		  this->_transition__CONNECT_FRONT = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__front))) {
-		    assert(this->_transition__CONNECT_FRONT == 0);
-		  
-		    this->_transition__CONNECT_FRONT = 5;
-		  }
-		  
 		  this->_transition__CONNECT_CORE = 0;
 		  
 		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__isAssembled)) {
@@ -1091,68 +1083,12 @@ namespace SimpleBlinky {
 		    this->_transition__CONNECT_CORE = 14;
 		  }
 		  
-		  this->_transition__CONNECT_BACK = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__back))) {
-		    assert(this->_transition__CONNECT_BACK == 0);
-		  
-		    this->_transition__CONNECT_BACK = 6;
-		  }
-		  
-		  this->_transition__DISCONNECT_BACK = 0;
-		  
-		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__back)) {
-		    assert(this->_transition__DISCONNECT_BACK == 0);
-		  
-		    this->_transition__DISCONNECT_BACK = 12;
-		  }
-		  
-		  this->_transition__DISCONNECT_LEFT = 0;
-		  
-		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__left)) {
-		    assert(this->_transition__DISCONNECT_LEFT == 0);
-		  
-		    this->_transition__DISCONNECT_LEFT = 7;
-		  }
-		  
-		  this->_transition__CONNECT_TOP = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__top))) {
-		    assert(this->_transition__CONNECT_TOP == 0);
-		  
-		    this->_transition__CONNECT_TOP = 3;
-		  }
-		  
-		  this->_transition__DISCONNECT_FRONT = 0;
-		  
-		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__front)) {
-		    assert(this->_transition__DISCONNECT_FRONT == 0);
-		  
-		    this->_transition__DISCONNECT_FRONT = 11;
-		  }
-		  
-		  this->_transition__CONNECT_BOTTOM = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__bottom))) {
-		    assert(this->_transition__CONNECT_BOTTOM == 0);
-		  
-		    this->_transition__CONNECT_BOTTOM = 4;
-		  }
-		  
 		  this->_transition__DISCONNECT_RIGHT = 0;
 		  
 		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__right)) {
 		    assert(this->_transition__DISCONNECT_RIGHT == 0);
 		  
 		    this->_transition__DISCONNECT_RIGHT = 8;
-		  }
-		  
-		  this->_transition__CONNECT_RIGHT = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__right))) {
-		    assert(this->_transition__CONNECT_RIGHT == 0);
-		  
-		    this->_transition__CONNECT_RIGHT = 2;
 		  }
 		  
 		  this->_transition__DISCONNECT_TOP = 0;
@@ -1163,6 +1099,14 @@ namespace SimpleBlinky {
 		    this->_transition__DISCONNECT_TOP = 9;
 		  }
 		  
+		  this->_transition__CONNECT_FRONT = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__front))) {
+		    assert(this->_transition__CONNECT_FRONT == 0);
+		  
+		    this->_transition__CONNECT_FRONT = 5;
+		  }
+		  
 		  this->_transition__CONNECT_LEFT = 0;
 		  
 		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__left))) {
@@ -1171,12 +1115,68 @@ namespace SimpleBlinky {
 		    this->_transition__CONNECT_LEFT = 1;
 		  }
 		  
+		  this->_transition__CONNECT_BACK = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__back))) {
+		    assert(this->_transition__CONNECT_BACK == 0);
+		  
+		    this->_transition__CONNECT_BACK = 6;
+		  }
+		  
 		  this->_transition__DISCONNECT_BOTTOM = 0;
 		  
 		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__bottom)) {
 		    assert(this->_transition__DISCONNECT_BOTTOM == 0);
 		  
 		    this->_transition__DISCONNECT_BOTTOM = 10;
+		  }
+		  
+		  this->_transition__DISCONNECT_LEFT = 0;
+		  
+		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__left)) {
+		    assert(this->_transition__DISCONNECT_LEFT == 0);
+		  
+		    this->_transition__DISCONNECT_LEFT = 7;
+		  }
+		  
+		  this->_transition__CONNECT_BOTTOM = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__bottom))) {
+		    assert(this->_transition__CONNECT_BOTTOM == 0);
+		  
+		    this->_transition__CONNECT_BOTTOM = 4;
+		  }
+		  
+		  this->_transition__CONNECT_RIGHT = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__right))) {
+		    assert(this->_transition__CONNECT_RIGHT == 0);
+		  
+		    this->_transition__CONNECT_RIGHT = 2;
+		  }
+		  
+		  this->_transition__DISCONNECT_FRONT = 0;
+		  
+		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__front)) {
+		    assert(this->_transition__DISCONNECT_FRONT == 0);
+		  
+		    this->_transition__DISCONNECT_FRONT = 11;
+		  }
+		  
+		  this->_transition__CONNECT_TOP = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__top))) {
+		    assert(this->_transition__CONNECT_TOP == 0);
+		  
+		    this->_transition__CONNECT_TOP = 3;
+		  }
+		  
+		  this->_transition__DISCONNECT_BACK = 0;
+		  
+		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__back)) {
+		    assert(this->_transition__DISCONNECT_BACK == 0);
+		  
+		    this->_transition__DISCONNECT_BACK = 12;
 		  }
 		
 		  return error;
@@ -1209,14 +1209,6 @@ namespace SimpleBlinky {
 		      assert(false);
 		  }
 		  
-		  this->_transition__CONNECT_FRONT = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__front))) {
-		    assert(this->_transition__CONNECT_FRONT == 0);
-		  
-		    this->_transition__CONNECT_FRONT = 5;
-		  }
-		  
 		  this->_transition__CONNECT_CORE = 0;
 		  
 		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__isAssembled)) {
@@ -1235,68 +1227,12 @@ namespace SimpleBlinky {
 		    this->_transition__CONNECT_CORE = 14;
 		  }
 		  
-		  this->_transition__CONNECT_BACK = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__back))) {
-		    assert(this->_transition__CONNECT_BACK == 0);
-		  
-		    this->_transition__CONNECT_BACK = 6;
-		  }
-		  
-		  this->_transition__DISCONNECT_BACK = 0;
-		  
-		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__back)) {
-		    assert(this->_transition__DISCONNECT_BACK == 0);
-		  
-		    this->_transition__DISCONNECT_BACK = 12;
-		  }
-		  
-		  this->_transition__DISCONNECT_LEFT = 0;
-		  
-		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__left)) {
-		    assert(this->_transition__DISCONNECT_LEFT == 0);
-		  
-		    this->_transition__DISCONNECT_LEFT = 7;
-		  }
-		  
-		  this->_transition__CONNECT_TOP = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__top))) {
-		    assert(this->_transition__CONNECT_TOP == 0);
-		  
-		    this->_transition__CONNECT_TOP = 3;
-		  }
-		  
-		  this->_transition__DISCONNECT_FRONT = 0;
-		  
-		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__front)) {
-		    assert(this->_transition__DISCONNECT_FRONT == 0);
-		  
-		    this->_transition__DISCONNECT_FRONT = 11;
-		  }
-		  
-		  this->_transition__CONNECT_BOTTOM = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__bottom))) {
-		    assert(this->_transition__CONNECT_BOTTOM == 0);
-		  
-		    this->_transition__CONNECT_BOTTOM = 4;
-		  }
-		  
 		  this->_transition__DISCONNECT_RIGHT = 0;
 		  
 		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__right)) {
 		    assert(this->_transition__DISCONNECT_RIGHT == 0);
 		  
 		    this->_transition__DISCONNECT_RIGHT = 8;
-		  }
-		  
-		  this->_transition__CONNECT_RIGHT = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__right))) {
-		    assert(this->_transition__CONNECT_RIGHT == 0);
-		  
-		    this->_transition__CONNECT_RIGHT = 2;
 		  }
 		  
 		  this->_transition__DISCONNECT_TOP = 0;
@@ -1307,6 +1243,14 @@ namespace SimpleBlinky {
 		    this->_transition__DISCONNECT_TOP = 9;
 		  }
 		  
+		  this->_transition__CONNECT_FRONT = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__front))) {
+		    assert(this->_transition__CONNECT_FRONT == 0);
+		  
+		    this->_transition__CONNECT_FRONT = 5;
+		  }
+		  
 		  this->_transition__CONNECT_LEFT = 0;
 		  
 		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__left))) {
@@ -1315,12 +1259,68 @@ namespace SimpleBlinky {
 		    this->_transition__CONNECT_LEFT = 1;
 		  }
 		  
+		  this->_transition__CONNECT_BACK = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__back))) {
+		    assert(this->_transition__CONNECT_BACK == 0);
+		  
+		    this->_transition__CONNECT_BACK = 6;
+		  }
+		  
 		  this->_transition__DISCONNECT_BOTTOM = 0;
 		  
 		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__bottom)) {
 		    assert(this->_transition__DISCONNECT_BOTTOM == 0);
 		  
 		    this->_transition__DISCONNECT_BOTTOM = 10;
+		  }
+		  
+		  this->_transition__DISCONNECT_LEFT = 0;
+		  
+		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__left)) {
+		    assert(this->_transition__DISCONNECT_LEFT == 0);
+		  
+		    this->_transition__DISCONNECT_LEFT = 7;
+		  }
+		  
+		  this->_transition__CONNECT_BOTTOM = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__bottom))) {
+		    assert(this->_transition__CONNECT_BOTTOM == 0);
+		  
+		    this->_transition__CONNECT_BOTTOM = 4;
+		  }
+		  
+		  this->_transition__CONNECT_RIGHT = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__right))) {
+		    assert(this->_transition__CONNECT_RIGHT == 0);
+		  
+		    this->_transition__CONNECT_RIGHT = 2;
+		  }
+		  
+		  this->_transition__DISCONNECT_FRONT = 0;
+		  
+		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__front)) {
+		    assert(this->_transition__DISCONNECT_FRONT == 0);
+		  
+		    this->_transition__DISCONNECT_FRONT = 11;
+		  }
+		  
+		  this->_transition__CONNECT_TOP = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__top))) {
+		    assert(this->_transition__CONNECT_TOP == 0);
+		  
+		    this->_transition__CONNECT_TOP = 3;
+		  }
+		  
+		  this->_transition__DISCONNECT_BACK = 0;
+		  
+		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__back)) {
+		    assert(this->_transition__DISCONNECT_BACK == 0);
+		  
+		    this->_transition__DISCONNECT_BACK = 12;
 		  }
 		
 		  return error;
@@ -1353,14 +1353,6 @@ namespace SimpleBlinky {
 		      assert(false);
 		  }
 		  
-		  this->_transition__CONNECT_FRONT = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__front))) {
-		    assert(this->_transition__CONNECT_FRONT == 0);
-		  
-		    this->_transition__CONNECT_FRONT = 5;
-		  }
-		  
 		  this->_transition__CONNECT_CORE = 0;
 		  
 		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__isAssembled)) {
@@ -1379,68 +1371,12 @@ namespace SimpleBlinky {
 		    this->_transition__CONNECT_CORE = 14;
 		  }
 		  
-		  this->_transition__CONNECT_BACK = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__back))) {
-		    assert(this->_transition__CONNECT_BACK == 0);
-		  
-		    this->_transition__CONNECT_BACK = 6;
-		  }
-		  
-		  this->_transition__DISCONNECT_BACK = 0;
-		  
-		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__back)) {
-		    assert(this->_transition__DISCONNECT_BACK == 0);
-		  
-		    this->_transition__DISCONNECT_BACK = 12;
-		  }
-		  
-		  this->_transition__DISCONNECT_LEFT = 0;
-		  
-		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__left)) {
-		    assert(this->_transition__DISCONNECT_LEFT == 0);
-		  
-		    this->_transition__DISCONNECT_LEFT = 7;
-		  }
-		  
-		  this->_transition__CONNECT_TOP = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__top))) {
-		    assert(this->_transition__CONNECT_TOP == 0);
-		  
-		    this->_transition__CONNECT_TOP = 3;
-		  }
-		  
-		  this->_transition__DISCONNECT_FRONT = 0;
-		  
-		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__front)) {
-		    assert(this->_transition__DISCONNECT_FRONT == 0);
-		  
-		    this->_transition__DISCONNECT_FRONT = 11;
-		  }
-		  
-		  this->_transition__CONNECT_BOTTOM = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__bottom))) {
-		    assert(this->_transition__CONNECT_BOTTOM == 0);
-		  
-		    this->_transition__CONNECT_BOTTOM = 4;
-		  }
-		  
 		  this->_transition__DISCONNECT_RIGHT = 0;
 		  
 		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__right)) {
 		    assert(this->_transition__DISCONNECT_RIGHT == 0);
 		  
 		    this->_transition__DISCONNECT_RIGHT = 8;
-		  }
-		  
-		  this->_transition__CONNECT_RIGHT = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__right))) {
-		    assert(this->_transition__CONNECT_RIGHT == 0);
-		  
-		    this->_transition__CONNECT_RIGHT = 2;
 		  }
 		  
 		  this->_transition__DISCONNECT_TOP = 0;
@@ -1451,6 +1387,14 @@ namespace SimpleBlinky {
 		    this->_transition__DISCONNECT_TOP = 9;
 		  }
 		  
+		  this->_transition__CONNECT_FRONT = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__front))) {
+		    assert(this->_transition__CONNECT_FRONT == 0);
+		  
+		    this->_transition__CONNECT_FRONT = 5;
+		  }
+		  
 		  this->_transition__CONNECT_LEFT = 0;
 		  
 		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__left))) {
@@ -1459,12 +1403,68 @@ namespace SimpleBlinky {
 		    this->_transition__CONNECT_LEFT = 1;
 		  }
 		  
+		  this->_transition__CONNECT_BACK = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__back))) {
+		    assert(this->_transition__CONNECT_BACK == 0);
+		  
+		    this->_transition__CONNECT_BACK = 6;
+		  }
+		  
 		  this->_transition__DISCONNECT_BOTTOM = 0;
 		  
 		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__bottom)) {
 		    assert(this->_transition__DISCONNECT_BOTTOM == 0);
 		  
 		    this->_transition__DISCONNECT_BOTTOM = 10;
+		  }
+		  
+		  this->_transition__DISCONNECT_LEFT = 0;
+		  
+		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__left)) {
+		    assert(this->_transition__DISCONNECT_LEFT == 0);
+		  
+		    this->_transition__DISCONNECT_LEFT = 7;
+		  }
+		  
+		  this->_transition__CONNECT_BOTTOM = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__bottom))) {
+		    assert(this->_transition__CONNECT_BOTTOM == 0);
+		  
+		    this->_transition__CONNECT_BOTTOM = 4;
+		  }
+		  
+		  this->_transition__CONNECT_RIGHT = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__right))) {
+		    assert(this->_transition__CONNECT_RIGHT == 0);
+		  
+		    this->_transition__CONNECT_RIGHT = 2;
+		  }
+		  
+		  this->_transition__DISCONNECT_FRONT = 0;
+		  
+		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__front)) {
+		    assert(this->_transition__DISCONNECT_FRONT == 0);
+		  
+		    this->_transition__DISCONNECT_FRONT = 11;
+		  }
+		  
+		  this->_transition__CONNECT_TOP = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__top))) {
+		    assert(this->_transition__CONNECT_TOP == 0);
+		  
+		    this->_transition__CONNECT_TOP = 3;
+		  }
+		  
+		  this->_transition__DISCONNECT_BACK = 0;
+		  
+		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__back)) {
+		    assert(this->_transition__DISCONNECT_BACK == 0);
+		  
+		    this->_transition__DISCONNECT_BACK = 12;
 		  }
 		
 		  return error;
@@ -1497,14 +1497,6 @@ namespace SimpleBlinky {
 		      assert(false);
 		  }
 		  
-		  this->_transition__CONNECT_FRONT = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__front))) {
-		    assert(this->_transition__CONNECT_FRONT == 0);
-		  
-		    this->_transition__CONNECT_FRONT = 5;
-		  }
-		  
 		  this->_transition__CONNECT_CORE = 0;
 		  
 		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__isAssembled)) {
@@ -1523,68 +1515,12 @@ namespace SimpleBlinky {
 		    this->_transition__CONNECT_CORE = 14;
 		  }
 		  
-		  this->_transition__CONNECT_BACK = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__back))) {
-		    assert(this->_transition__CONNECT_BACK == 0);
-		  
-		    this->_transition__CONNECT_BACK = 6;
-		  }
-		  
-		  this->_transition__DISCONNECT_BACK = 0;
-		  
-		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__back)) {
-		    assert(this->_transition__DISCONNECT_BACK == 0);
-		  
-		    this->_transition__DISCONNECT_BACK = 12;
-		  }
-		  
-		  this->_transition__DISCONNECT_LEFT = 0;
-		  
-		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__left)) {
-		    assert(this->_transition__DISCONNECT_LEFT == 0);
-		  
-		    this->_transition__DISCONNECT_LEFT = 7;
-		  }
-		  
-		  this->_transition__CONNECT_TOP = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__top))) {
-		    assert(this->_transition__CONNECT_TOP == 0);
-		  
-		    this->_transition__CONNECT_TOP = 3;
-		  }
-		  
-		  this->_transition__DISCONNECT_FRONT = 0;
-		  
-		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__front)) {
-		    assert(this->_transition__DISCONNECT_FRONT == 0);
-		  
-		    this->_transition__DISCONNECT_FRONT = 11;
-		  }
-		  
-		  this->_transition__CONNECT_BOTTOM = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__bottom))) {
-		    assert(this->_transition__CONNECT_BOTTOM == 0);
-		  
-		    this->_transition__CONNECT_BOTTOM = 4;
-		  }
-		  
 		  this->_transition__DISCONNECT_RIGHT = 0;
 		  
 		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__right)) {
 		    assert(this->_transition__DISCONNECT_RIGHT == 0);
 		  
 		    this->_transition__DISCONNECT_RIGHT = 8;
-		  }
-		  
-		  this->_transition__CONNECT_RIGHT = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__right))) {
-		    assert(this->_transition__CONNECT_RIGHT == 0);
-		  
-		    this->_transition__CONNECT_RIGHT = 2;
 		  }
 		  
 		  this->_transition__DISCONNECT_TOP = 0;
@@ -1595,6 +1531,14 @@ namespace SimpleBlinky {
 		    this->_transition__DISCONNECT_TOP = 9;
 		  }
 		  
+		  this->_transition__CONNECT_FRONT = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__front))) {
+		    assert(this->_transition__CONNECT_FRONT == 0);
+		  
+		    this->_transition__CONNECT_FRONT = 5;
+		  }
+		  
 		  this->_transition__CONNECT_LEFT = 0;
 		  
 		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__left))) {
@@ -1603,12 +1547,68 @@ namespace SimpleBlinky {
 		    this->_transition__CONNECT_LEFT = 1;
 		  }
 		  
+		  this->_transition__CONNECT_BACK = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__back))) {
+		    assert(this->_transition__CONNECT_BACK == 0);
+		  
+		    this->_transition__CONNECT_BACK = 6;
+		  }
+		  
 		  this->_transition__DISCONNECT_BOTTOM = 0;
 		  
 		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__bottom)) {
 		    assert(this->_transition__DISCONNECT_BOTTOM == 0);
 		  
 		    this->_transition__DISCONNECT_BOTTOM = 10;
+		  }
+		  
+		  this->_transition__DISCONNECT_LEFT = 0;
+		  
+		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__left)) {
+		    assert(this->_transition__DISCONNECT_LEFT == 0);
+		  
+		    this->_transition__DISCONNECT_LEFT = 7;
+		  }
+		  
+		  this->_transition__CONNECT_BOTTOM = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__bottom))) {
+		    assert(this->_transition__CONNECT_BOTTOM == 0);
+		  
+		    this->_transition__CONNECT_BOTTOM = 4;
+		  }
+		  
+		  this->_transition__CONNECT_RIGHT = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__right))) {
+		    assert(this->_transition__CONNECT_RIGHT == 0);
+		  
+		    this->_transition__CONNECT_RIGHT = 2;
+		  }
+		  
+		  this->_transition__DISCONNECT_FRONT = 0;
+		  
+		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__front)) {
+		    assert(this->_transition__DISCONNECT_FRONT == 0);
+		  
+		    this->_transition__DISCONNECT_FRONT = 11;
+		  }
+		  
+		  this->_transition__CONNECT_TOP = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__top))) {
+		    assert(this->_transition__CONNECT_TOP == 0);
+		  
+		    this->_transition__CONNECT_TOP = 3;
+		  }
+		  
+		  this->_transition__DISCONNECT_BACK = 0;
+		  
+		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__back)) {
+		    assert(this->_transition__DISCONNECT_BACK == 0);
+		  
+		    this->_transition__DISCONNECT_BACK = 12;
 		  }
 		
 		  return error;
@@ -1641,14 +1641,6 @@ namespace SimpleBlinky {
 		      assert(false);
 		  }
 		  
-		  this->_transition__CONNECT_FRONT = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__front))) {
-		    assert(this->_transition__CONNECT_FRONT == 0);
-		  
-		    this->_transition__CONNECT_FRONT = 5;
-		  }
-		  
 		  this->_transition__CONNECT_CORE = 0;
 		  
 		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__isAssembled)) {
@@ -1667,68 +1659,12 @@ namespace SimpleBlinky {
 		    this->_transition__CONNECT_CORE = 14;
 		  }
 		  
-		  this->_transition__CONNECT_BACK = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__back))) {
-		    assert(this->_transition__CONNECT_BACK == 0);
-		  
-		    this->_transition__CONNECT_BACK = 6;
-		  }
-		  
-		  this->_transition__DISCONNECT_BACK = 0;
-		  
-		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__back)) {
-		    assert(this->_transition__DISCONNECT_BACK == 0);
-		  
-		    this->_transition__DISCONNECT_BACK = 12;
-		  }
-		  
-		  this->_transition__DISCONNECT_LEFT = 0;
-		  
-		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__left)) {
-		    assert(this->_transition__DISCONNECT_LEFT == 0);
-		  
-		    this->_transition__DISCONNECT_LEFT = 7;
-		  }
-		  
-		  this->_transition__CONNECT_TOP = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__top))) {
-		    assert(this->_transition__CONNECT_TOP == 0);
-		  
-		    this->_transition__CONNECT_TOP = 3;
-		  }
-		  
-		  this->_transition__DISCONNECT_FRONT = 0;
-		  
-		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__front)) {
-		    assert(this->_transition__DISCONNECT_FRONT == 0);
-		  
-		    this->_transition__DISCONNECT_FRONT = 11;
-		  }
-		  
-		  this->_transition__CONNECT_BOTTOM = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__bottom))) {
-		    assert(this->_transition__CONNECT_BOTTOM == 0);
-		  
-		    this->_transition__CONNECT_BOTTOM = 4;
-		  }
-		  
 		  this->_transition__DISCONNECT_RIGHT = 0;
 		  
 		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__right)) {
 		    assert(this->_transition__DISCONNECT_RIGHT == 0);
 		  
 		    this->_transition__DISCONNECT_RIGHT = 8;
-		  }
-		  
-		  this->_transition__CONNECT_RIGHT = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__right))) {
-		    assert(this->_transition__CONNECT_RIGHT == 0);
-		  
-		    this->_transition__CONNECT_RIGHT = 2;
 		  }
 		  
 		  this->_transition__DISCONNECT_TOP = 0;
@@ -1739,6 +1675,14 @@ namespace SimpleBlinky {
 		    this->_transition__DISCONNECT_TOP = 9;
 		  }
 		  
+		  this->_transition__CONNECT_FRONT = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__front))) {
+		    assert(this->_transition__CONNECT_FRONT == 0);
+		  
+		    this->_transition__CONNECT_FRONT = 5;
+		  }
+		  
 		  this->_transition__CONNECT_LEFT = 0;
 		  
 		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__left))) {
@@ -1747,12 +1691,68 @@ namespace SimpleBlinky {
 		    this->_transition__CONNECT_LEFT = 1;
 		  }
 		  
+		  this->_transition__CONNECT_BACK = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__back))) {
+		    assert(this->_transition__CONNECT_BACK == 0);
+		  
+		    this->_transition__CONNECT_BACK = 6;
+		  }
+		  
 		  this->_transition__DISCONNECT_BOTTOM = 0;
 		  
 		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__bottom)) {
 		    assert(this->_transition__DISCONNECT_BOTTOM == 0);
 		  
 		    this->_transition__DISCONNECT_BOTTOM = 10;
+		  }
+		  
+		  this->_transition__DISCONNECT_LEFT = 0;
+		  
+		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__left)) {
+		    assert(this->_transition__DISCONNECT_LEFT == 0);
+		  
+		    this->_transition__DISCONNECT_LEFT = 7;
+		  }
+		  
+		  this->_transition__CONNECT_BOTTOM = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__bottom))) {
+		    assert(this->_transition__CONNECT_BOTTOM == 0);
+		  
+		    this->_transition__CONNECT_BOTTOM = 4;
+		  }
+		  
+		  this->_transition__CONNECT_RIGHT = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__right))) {
+		    assert(this->_transition__CONNECT_RIGHT == 0);
+		  
+		    this->_transition__CONNECT_RIGHT = 2;
+		  }
+		  
+		  this->_transition__DISCONNECT_FRONT = 0;
+		  
+		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__front)) {
+		    assert(this->_transition__DISCONNECT_FRONT == 0);
+		  
+		    this->_transition__DISCONNECT_FRONT = 11;
+		  }
+		  
+		  this->_transition__CONNECT_TOP = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__top))) {
+		    assert(this->_transition__CONNECT_TOP == 0);
+		  
+		    this->_transition__CONNECT_TOP = 3;
+		  }
+		  
+		  this->_transition__DISCONNECT_BACK = 0;
+		  
+		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__back)) {
+		    assert(this->_transition__DISCONNECT_BACK == 0);
+		  
+		    this->_transition__DISCONNECT_BACK = 12;
 		  }
 		
 		  return error;
@@ -1785,14 +1785,6 @@ namespace SimpleBlinky {
 		      assert(false);
 		  }
 		  
-		  this->_transition__CONNECT_FRONT = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__front))) {
-		    assert(this->_transition__CONNECT_FRONT == 0);
-		  
-		    this->_transition__CONNECT_FRONT = 5;
-		  }
-		  
 		  this->_transition__CONNECT_CORE = 0;
 		  
 		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__isAssembled)) {
@@ -1811,68 +1803,12 @@ namespace SimpleBlinky {
 		    this->_transition__CONNECT_CORE = 14;
 		  }
 		  
-		  this->_transition__CONNECT_BACK = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__back))) {
-		    assert(this->_transition__CONNECT_BACK == 0);
-		  
-		    this->_transition__CONNECT_BACK = 6;
-		  }
-		  
-		  this->_transition__DISCONNECT_BACK = 0;
-		  
-		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__back)) {
-		    assert(this->_transition__DISCONNECT_BACK == 0);
-		  
-		    this->_transition__DISCONNECT_BACK = 12;
-		  }
-		  
-		  this->_transition__DISCONNECT_LEFT = 0;
-		  
-		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__left)) {
-		    assert(this->_transition__DISCONNECT_LEFT == 0);
-		  
-		    this->_transition__DISCONNECT_LEFT = 7;
-		  }
-		  
-		  this->_transition__CONNECT_TOP = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__top))) {
-		    assert(this->_transition__CONNECT_TOP == 0);
-		  
-		    this->_transition__CONNECT_TOP = 3;
-		  }
-		  
-		  this->_transition__DISCONNECT_FRONT = 0;
-		  
-		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__front)) {
-		    assert(this->_transition__DISCONNECT_FRONT == 0);
-		  
-		    this->_transition__DISCONNECT_FRONT = 11;
-		  }
-		  
-		  this->_transition__CONNECT_BOTTOM = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__bottom))) {
-		    assert(this->_transition__CONNECT_BOTTOM == 0);
-		  
-		    this->_transition__CONNECT_BOTTOM = 4;
-		  }
-		  
 		  this->_transition__DISCONNECT_RIGHT = 0;
 		  
 		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__right)) {
 		    assert(this->_transition__DISCONNECT_RIGHT == 0);
 		  
 		    this->_transition__DISCONNECT_RIGHT = 8;
-		  }
-		  
-		  this->_transition__CONNECT_RIGHT = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__right))) {
-		    assert(this->_transition__CONNECT_RIGHT == 0);
-		  
-		    this->_transition__CONNECT_RIGHT = 2;
 		  }
 		  
 		  this->_transition__DISCONNECT_TOP = 0;
@@ -1883,6 +1819,14 @@ namespace SimpleBlinky {
 		    this->_transition__DISCONNECT_TOP = 9;
 		  }
 		  
+		  this->_transition__CONNECT_FRONT = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__front))) {
+		    assert(this->_transition__CONNECT_FRONT == 0);
+		  
+		    this->_transition__CONNECT_FRONT = 5;
+		  }
+		  
 		  this->_transition__CONNECT_LEFT = 0;
 		  
 		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__left))) {
@@ -1891,12 +1835,68 @@ namespace SimpleBlinky {
 		    this->_transition__CONNECT_LEFT = 1;
 		  }
 		  
+		  this->_transition__CONNECT_BACK = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__back))) {
+		    assert(this->_transition__CONNECT_BACK == 0);
+		  
+		    this->_transition__CONNECT_BACK = 6;
+		  }
+		  
 		  this->_transition__DISCONNECT_BOTTOM = 0;
 		  
 		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__bottom)) {
 		    assert(this->_transition__DISCONNECT_BOTTOM == 0);
 		  
 		    this->_transition__DISCONNECT_BOTTOM = 10;
+		  }
+		  
+		  this->_transition__DISCONNECT_LEFT = 0;
+		  
+		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__left)) {
+		    assert(this->_transition__DISCONNECT_LEFT == 0);
+		  
+		    this->_transition__DISCONNECT_LEFT = 7;
+		  }
+		  
+		  this->_transition__CONNECT_BOTTOM = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__bottom))) {
+		    assert(this->_transition__CONNECT_BOTTOM == 0);
+		  
+		    this->_transition__CONNECT_BOTTOM = 4;
+		  }
+		  
+		  this->_transition__CONNECT_RIGHT = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__right))) {
+		    assert(this->_transition__CONNECT_RIGHT == 0);
+		  
+		    this->_transition__CONNECT_RIGHT = 2;
+		  }
+		  
+		  this->_transition__DISCONNECT_FRONT = 0;
+		  
+		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__front)) {
+		    assert(this->_transition__DISCONNECT_FRONT == 0);
+		  
+		    this->_transition__DISCONNECT_FRONT = 11;
+		  }
+		  
+		  this->_transition__CONNECT_TOP = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__top))) {
+		    assert(this->_transition__CONNECT_TOP == 0);
+		  
+		    this->_transition__CONNECT_TOP = 3;
+		  }
+		  
+		  this->_transition__DISCONNECT_BACK = 0;
+		  
+		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__back)) {
+		    assert(this->_transition__DISCONNECT_BACK == 0);
+		  
+		    this->_transition__DISCONNECT_BACK = 12;
 		  }
 		
 		  return error;
@@ -1929,14 +1929,6 @@ namespace SimpleBlinky {
 		      assert(false);
 		  }
 		  
-		  this->_transition__CONNECT_FRONT = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__front))) {
-		    assert(this->_transition__CONNECT_FRONT == 0);
-		  
-		    this->_transition__CONNECT_FRONT = 5;
-		  }
-		  
 		  this->_transition__CONNECT_CORE = 0;
 		  
 		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__isAssembled)) {
@@ -1955,68 +1947,12 @@ namespace SimpleBlinky {
 		    this->_transition__CONNECT_CORE = 14;
 		  }
 		  
-		  this->_transition__CONNECT_BACK = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__back))) {
-		    assert(this->_transition__CONNECT_BACK == 0);
-		  
-		    this->_transition__CONNECT_BACK = 6;
-		  }
-		  
-		  this->_transition__DISCONNECT_BACK = 0;
-		  
-		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__back)) {
-		    assert(this->_transition__DISCONNECT_BACK == 0);
-		  
-		    this->_transition__DISCONNECT_BACK = 12;
-		  }
-		  
-		  this->_transition__DISCONNECT_LEFT = 0;
-		  
-		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__left)) {
-		    assert(this->_transition__DISCONNECT_LEFT == 0);
-		  
-		    this->_transition__DISCONNECT_LEFT = 7;
-		  }
-		  
-		  this->_transition__CONNECT_TOP = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__top))) {
-		    assert(this->_transition__CONNECT_TOP == 0);
-		  
-		    this->_transition__CONNECT_TOP = 3;
-		  }
-		  
-		  this->_transition__DISCONNECT_FRONT = 0;
-		  
-		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__front)) {
-		    assert(this->_transition__DISCONNECT_FRONT == 0);
-		  
-		    this->_transition__DISCONNECT_FRONT = 11;
-		  }
-		  
-		  this->_transition__CONNECT_BOTTOM = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__bottom))) {
-		    assert(this->_transition__CONNECT_BOTTOM == 0);
-		  
-		    this->_transition__CONNECT_BOTTOM = 4;
-		  }
-		  
 		  this->_transition__DISCONNECT_RIGHT = 0;
 		  
 		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__right)) {
 		    assert(this->_transition__DISCONNECT_RIGHT == 0);
 		  
 		    this->_transition__DISCONNECT_RIGHT = 8;
-		  }
-		  
-		  this->_transition__CONNECT_RIGHT = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__right))) {
-		    assert(this->_transition__CONNECT_RIGHT == 0);
-		  
-		    this->_transition__CONNECT_RIGHT = 2;
 		  }
 		  
 		  this->_transition__DISCONNECT_TOP = 0;
@@ -2027,6 +1963,14 @@ namespace SimpleBlinky {
 		    this->_transition__DISCONNECT_TOP = 9;
 		  }
 		  
+		  this->_transition__CONNECT_FRONT = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__front))) {
+		    assert(this->_transition__CONNECT_FRONT == 0);
+		  
+		    this->_transition__CONNECT_FRONT = 5;
+		  }
+		  
 		  this->_transition__CONNECT_LEFT = 0;
 		  
 		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__left))) {
@@ -2035,12 +1979,68 @@ namespace SimpleBlinky {
 		    this->_transition__CONNECT_LEFT = 1;
 		  }
 		  
+		  this->_transition__CONNECT_BACK = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__back))) {
+		    assert(this->_transition__CONNECT_BACK == 0);
+		  
+		    this->_transition__CONNECT_BACK = 6;
+		  }
+		  
 		  this->_transition__DISCONNECT_BOTTOM = 0;
 		  
 		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__bottom)) {
 		    assert(this->_transition__DISCONNECT_BOTTOM == 0);
 		  
 		    this->_transition__DISCONNECT_BOTTOM = 10;
+		  }
+		  
+		  this->_transition__DISCONNECT_LEFT = 0;
+		  
+		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__left)) {
+		    assert(this->_transition__DISCONNECT_LEFT == 0);
+		  
+		    this->_transition__DISCONNECT_LEFT = 7;
+		  }
+		  
+		  this->_transition__CONNECT_BOTTOM = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__bottom))) {
+		    assert(this->_transition__CONNECT_BOTTOM == 0);
+		  
+		    this->_transition__CONNECT_BOTTOM = 4;
+		  }
+		  
+		  this->_transition__CONNECT_RIGHT = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__right))) {
+		    assert(this->_transition__CONNECT_RIGHT == 0);
+		  
+		    this->_transition__CONNECT_RIGHT = 2;
+		  }
+		  
+		  this->_transition__DISCONNECT_FRONT = 0;
+		  
+		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__front)) {
+		    assert(this->_transition__DISCONNECT_FRONT == 0);
+		  
+		    this->_transition__DISCONNECT_FRONT = 11;
+		  }
+		  
+		  this->_transition__CONNECT_TOP = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__top))) {
+		    assert(this->_transition__CONNECT_TOP == 0);
+		  
+		    this->_transition__CONNECT_TOP = 3;
+		  }
+		  
+		  this->_transition__DISCONNECT_BACK = 0;
+		  
+		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__back)) {
+		    assert(this->_transition__DISCONNECT_BACK == 0);
+		  
+		    this->_transition__DISCONNECT_BACK = 12;
 		  }
 		
 		  return error;
@@ -2073,14 +2073,6 @@ namespace SimpleBlinky {
 		      assert(false);
 		  }
 		  
-		  this->_transition__CONNECT_FRONT = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__front))) {
-		    assert(this->_transition__CONNECT_FRONT == 0);
-		  
-		    this->_transition__CONNECT_FRONT = 5;
-		  }
-		  
 		  this->_transition__CONNECT_CORE = 0;
 		  
 		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__isAssembled)) {
@@ -2099,68 +2091,12 @@ namespace SimpleBlinky {
 		    this->_transition__CONNECT_CORE = 14;
 		  }
 		  
-		  this->_transition__CONNECT_BACK = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__back))) {
-		    assert(this->_transition__CONNECT_BACK == 0);
-		  
-		    this->_transition__CONNECT_BACK = 6;
-		  }
-		  
-		  this->_transition__DISCONNECT_BACK = 0;
-		  
-		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__back)) {
-		    assert(this->_transition__DISCONNECT_BACK == 0);
-		  
-		    this->_transition__DISCONNECT_BACK = 12;
-		  }
-		  
-		  this->_transition__DISCONNECT_LEFT = 0;
-		  
-		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__left)) {
-		    assert(this->_transition__DISCONNECT_LEFT == 0);
-		  
-		    this->_transition__DISCONNECT_LEFT = 7;
-		  }
-		  
-		  this->_transition__CONNECT_TOP = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__top))) {
-		    assert(this->_transition__CONNECT_TOP == 0);
-		  
-		    this->_transition__CONNECT_TOP = 3;
-		  }
-		  
-		  this->_transition__DISCONNECT_FRONT = 0;
-		  
-		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__front)) {
-		    assert(this->_transition__DISCONNECT_FRONT == 0);
-		  
-		    this->_transition__DISCONNECT_FRONT = 11;
-		  }
-		  
-		  this->_transition__CONNECT_BOTTOM = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__bottom))) {
-		    assert(this->_transition__CONNECT_BOTTOM == 0);
-		  
-		    this->_transition__CONNECT_BOTTOM = 4;
-		  }
-		  
 		  this->_transition__DISCONNECT_RIGHT = 0;
 		  
 		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__right)) {
 		    assert(this->_transition__DISCONNECT_RIGHT == 0);
 		  
 		    this->_transition__DISCONNECT_RIGHT = 8;
-		  }
-		  
-		  this->_transition__CONNECT_RIGHT = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__right))) {
-		    assert(this->_transition__CONNECT_RIGHT == 0);
-		  
-		    this->_transition__CONNECT_RIGHT = 2;
 		  }
 		  
 		  this->_transition__DISCONNECT_TOP = 0;
@@ -2171,6 +2107,14 @@ namespace SimpleBlinky {
 		    this->_transition__DISCONNECT_TOP = 9;
 		  }
 		  
+		  this->_transition__CONNECT_FRONT = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__front))) {
+		    assert(this->_transition__CONNECT_FRONT == 0);
+		  
+		    this->_transition__CONNECT_FRONT = 5;
+		  }
+		  
 		  this->_transition__CONNECT_LEFT = 0;
 		  
 		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__left))) {
@@ -2179,12 +2123,68 @@ namespace SimpleBlinky {
 		    this->_transition__CONNECT_LEFT = 1;
 		  }
 		  
+		  this->_transition__CONNECT_BACK = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__back))) {
+		    assert(this->_transition__CONNECT_BACK == 0);
+		  
+		    this->_transition__CONNECT_BACK = 6;
+		  }
+		  
 		  this->_transition__DISCONNECT_BOTTOM = 0;
 		  
 		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__bottom)) {
 		    assert(this->_transition__DISCONNECT_BOTTOM == 0);
 		  
 		    this->_transition__DISCONNECT_BOTTOM = 10;
+		  }
+		  
+		  this->_transition__DISCONNECT_LEFT = 0;
+		  
+		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__left)) {
+		    assert(this->_transition__DISCONNECT_LEFT == 0);
+		  
+		    this->_transition__DISCONNECT_LEFT = 7;
+		  }
+		  
+		  this->_transition__CONNECT_BOTTOM = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__bottom))) {
+		    assert(this->_transition__CONNECT_BOTTOM == 0);
+		  
+		    this->_transition__CONNECT_BOTTOM = 4;
+		  }
+		  
+		  this->_transition__CONNECT_RIGHT = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__right))) {
+		    assert(this->_transition__CONNECT_RIGHT == 0);
+		  
+		    this->_transition__CONNECT_RIGHT = 2;
+		  }
+		  
+		  this->_transition__DISCONNECT_FRONT = 0;
+		  
+		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__front)) {
+		    assert(this->_transition__DISCONNECT_FRONT == 0);
+		  
+		    this->_transition__DISCONNECT_FRONT = 11;
+		  }
+		  
+		  this->_transition__CONNECT_TOP = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__top))) {
+		    assert(this->_transition__CONNECT_TOP == 0);
+		  
+		    this->_transition__CONNECT_TOP = 3;
+		  }
+		  
+		  this->_transition__DISCONNECT_BACK = 0;
+		  
+		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__back)) {
+		    assert(this->_transition__DISCONNECT_BACK == 0);
+		  
+		    this->_transition__DISCONNECT_BACK = 12;
 		  }
 		
 		  return error;
@@ -2217,14 +2217,6 @@ namespace SimpleBlinky {
 		      assert(false);
 		  }
 		  
-		  this->_transition__CONNECT_FRONT = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__front))) {
-		    assert(this->_transition__CONNECT_FRONT == 0);
-		  
-		    this->_transition__CONNECT_FRONT = 5;
-		  }
-		  
 		  this->_transition__CONNECT_CORE = 0;
 		  
 		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__isAssembled)) {
@@ -2243,68 +2235,12 @@ namespace SimpleBlinky {
 		    this->_transition__CONNECT_CORE = 14;
 		  }
 		  
-		  this->_transition__CONNECT_BACK = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__back))) {
-		    assert(this->_transition__CONNECT_BACK == 0);
-		  
-		    this->_transition__CONNECT_BACK = 6;
-		  }
-		  
-		  this->_transition__DISCONNECT_BACK = 0;
-		  
-		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__back)) {
-		    assert(this->_transition__DISCONNECT_BACK == 0);
-		  
-		    this->_transition__DISCONNECT_BACK = 12;
-		  }
-		  
-		  this->_transition__DISCONNECT_LEFT = 0;
-		  
-		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__left)) {
-		    assert(this->_transition__DISCONNECT_LEFT == 0);
-		  
-		    this->_transition__DISCONNECT_LEFT = 7;
-		  }
-		  
-		  this->_transition__CONNECT_TOP = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__top))) {
-		    assert(this->_transition__CONNECT_TOP == 0);
-		  
-		    this->_transition__CONNECT_TOP = 3;
-		  }
-		  
-		  this->_transition__DISCONNECT_FRONT = 0;
-		  
-		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__front)) {
-		    assert(this->_transition__DISCONNECT_FRONT == 0);
-		  
-		    this->_transition__DISCONNECT_FRONT = 11;
-		  }
-		  
-		  this->_transition__CONNECT_BOTTOM = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__bottom))) {
-		    assert(this->_transition__CONNECT_BOTTOM == 0);
-		  
-		    this->_transition__CONNECT_BOTTOM = 4;
-		  }
-		  
 		  this->_transition__DISCONNECT_RIGHT = 0;
 		  
 		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__right)) {
 		    assert(this->_transition__DISCONNECT_RIGHT == 0);
 		  
 		    this->_transition__DISCONNECT_RIGHT = 8;
-		  }
-		  
-		  this->_transition__CONNECT_RIGHT = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__right))) {
-		    assert(this->_transition__CONNECT_RIGHT == 0);
-		  
-		    this->_transition__CONNECT_RIGHT = 2;
 		  }
 		  
 		  this->_transition__DISCONNECT_TOP = 0;
@@ -2315,6 +2251,14 @@ namespace SimpleBlinky {
 		    this->_transition__DISCONNECT_TOP = 9;
 		  }
 		  
+		  this->_transition__CONNECT_FRONT = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__front))) {
+		    assert(this->_transition__CONNECT_FRONT == 0);
+		  
+		    this->_transition__CONNECT_FRONT = 5;
+		  }
+		  
 		  this->_transition__CONNECT_LEFT = 0;
 		  
 		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__left))) {
@@ -2323,12 +2267,68 @@ namespace SimpleBlinky {
 		    this->_transition__CONNECT_LEFT = 1;
 		  }
 		  
+		  this->_transition__CONNECT_BACK = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__back))) {
+		    assert(this->_transition__CONNECT_BACK == 0);
+		  
+		    this->_transition__CONNECT_BACK = 6;
+		  }
+		  
 		  this->_transition__DISCONNECT_BOTTOM = 0;
 		  
 		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__bottom)) {
 		    assert(this->_transition__DISCONNECT_BOTTOM == 0);
 		  
 		    this->_transition__DISCONNECT_BOTTOM = 10;
+		  }
+		  
+		  this->_transition__DISCONNECT_LEFT = 0;
+		  
+		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__left)) {
+		    assert(this->_transition__DISCONNECT_LEFT == 0);
+		  
+		    this->_transition__DISCONNECT_LEFT = 7;
+		  }
+		  
+		  this->_transition__CONNECT_BOTTOM = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__bottom))) {
+		    assert(this->_transition__CONNECT_BOTTOM == 0);
+		  
+		    this->_transition__CONNECT_BOTTOM = 4;
+		  }
+		  
+		  this->_transition__CONNECT_RIGHT = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__right))) {
+		    assert(this->_transition__CONNECT_RIGHT == 0);
+		  
+		    this->_transition__CONNECT_RIGHT = 2;
+		  }
+		  
+		  this->_transition__DISCONNECT_FRONT = 0;
+		  
+		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__front)) {
+		    assert(this->_transition__DISCONNECT_FRONT == 0);
+		  
+		    this->_transition__DISCONNECT_FRONT = 11;
+		  }
+		  
+		  this->_transition__CONNECT_TOP = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__top))) {
+		    assert(this->_transition__CONNECT_TOP == 0);
+		  
+		    this->_transition__CONNECT_TOP = 3;
+		  }
+		  
+		  this->_transition__DISCONNECT_BACK = 0;
+		  
+		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__back)) {
+		    assert(this->_transition__DISCONNECT_BACK == 0);
+		  
+		    this->_transition__DISCONNECT_BACK = 12;
 		  }
 		
 		  return error;
@@ -2379,14 +2379,6 @@ namespace SimpleBlinky {
 		      assert(false);
 		  }
 		  
-		  this->_transition__CONNECT_FRONT = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__front))) {
-		    assert(this->_transition__CONNECT_FRONT == 0);
-		  
-		    this->_transition__CONNECT_FRONT = 5;
-		  }
-		  
 		  this->_transition__CONNECT_CORE = 0;
 		  
 		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__isAssembled)) {
@@ -2405,68 +2397,12 @@ namespace SimpleBlinky {
 		    this->_transition__CONNECT_CORE = 14;
 		  }
 		  
-		  this->_transition__CONNECT_BACK = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__back))) {
-		    assert(this->_transition__CONNECT_BACK == 0);
-		  
-		    this->_transition__CONNECT_BACK = 6;
-		  }
-		  
-		  this->_transition__DISCONNECT_BACK = 0;
-		  
-		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__back)) {
-		    assert(this->_transition__DISCONNECT_BACK == 0);
-		  
-		    this->_transition__DISCONNECT_BACK = 12;
-		  }
-		  
-		  this->_transition__DISCONNECT_LEFT = 0;
-		  
-		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__left)) {
-		    assert(this->_transition__DISCONNECT_LEFT == 0);
-		  
-		    this->_transition__DISCONNECT_LEFT = 7;
-		  }
-		  
-		  this->_transition__CONNECT_TOP = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__top))) {
-		    assert(this->_transition__CONNECT_TOP == 0);
-		  
-		    this->_transition__CONNECT_TOP = 3;
-		  }
-		  
-		  this->_transition__DISCONNECT_FRONT = 0;
-		  
-		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__front)) {
-		    assert(this->_transition__DISCONNECT_FRONT == 0);
-		  
-		    this->_transition__DISCONNECT_FRONT = 11;
-		  }
-		  
-		  this->_transition__CONNECT_BOTTOM = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__bottom))) {
-		    assert(this->_transition__CONNECT_BOTTOM == 0);
-		  
-		    this->_transition__CONNECT_BOTTOM = 4;
-		  }
-		  
 		  this->_transition__DISCONNECT_RIGHT = 0;
 		  
 		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__right)) {
 		    assert(this->_transition__DISCONNECT_RIGHT == 0);
 		  
 		    this->_transition__DISCONNECT_RIGHT = 8;
-		  }
-		  
-		  this->_transition__CONNECT_RIGHT = 0;
-		  
-		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__right))) {
-		    assert(this->_transition__CONNECT_RIGHT == 0);
-		  
-		    this->_transition__CONNECT_RIGHT = 2;
 		  }
 		  
 		  this->_transition__DISCONNECT_TOP = 0;
@@ -2477,6 +2413,14 @@ namespace SimpleBlinky {
 		    this->_transition__DISCONNECT_TOP = 9;
 		  }
 		  
+		  this->_transition__CONNECT_FRONT = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__front))) {
+		    assert(this->_transition__CONNECT_FRONT == 0);
+		  
+		    this->_transition__CONNECT_FRONT = 5;
+		  }
+		  
 		  this->_transition__CONNECT_LEFT = 0;
 		  
 		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__left))) {
@@ -2485,12 +2429,68 @@ namespace SimpleBlinky {
 		    this->_transition__CONNECT_LEFT = 1;
 		  }
 		  
+		  this->_transition__CONNECT_BACK = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__back))) {
+		    assert(this->_transition__CONNECT_BACK == 0);
+		  
+		    this->_transition__CONNECT_BACK = 6;
+		  }
+		  
 		  this->_transition__DISCONNECT_BOTTOM = 0;
 		  
 		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__bottom)) {
 		    assert(this->_transition__DISCONNECT_BOTTOM == 0);
 		  
 		    this->_transition__DISCONNECT_BOTTOM = 10;
+		  }
+		  
+		  this->_transition__DISCONNECT_LEFT = 0;
+		  
+		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__left)) {
+		    assert(this->_transition__DISCONNECT_LEFT == 0);
+		  
+		    this->_transition__DISCONNECT_LEFT = 7;
+		  }
+		  
+		  this->_transition__CONNECT_BOTTOM = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__bottom))) {
+		    assert(this->_transition__CONNECT_BOTTOM == 0);
+		  
+		    this->_transition__CONNECT_BOTTOM = 4;
+		  }
+		  
+		  this->_transition__CONNECT_RIGHT = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__right))) {
+		    assert(this->_transition__CONNECT_RIGHT == 0);
+		  
+		    this->_transition__CONNECT_RIGHT = 2;
+		  }
+		  
+		  this->_transition__DISCONNECT_FRONT = 0;
+		  
+		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__front)) {
+		    assert(this->_transition__DISCONNECT_FRONT == 0);
+		  
+		    this->_transition__DISCONNECT_FRONT = 11;
+		  }
+		  
+		  this->_transition__CONNECT_TOP = 0;
+		  
+		  if (((_state[0/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 0%(8*sizeof(unsigned int)))) != 0) && (! (this->_m__top))) {
+		    assert(this->_transition__CONNECT_TOP == 0);
+		  
+		    this->_transition__CONNECT_TOP = 3;
+		  }
+		  
+		  this->_transition__DISCONNECT_BACK = 0;
+		  
+		  if (((_state[1/(8*sizeof(unsigned int))] & (((unsigned int) 1) << 1%(8*sizeof(unsigned int)))) != 0) && (this->_m__back)) {
+		    assert(this->_transition__DISCONNECT_BACK == 0);
+		  
+		    this->_transition__DISCONNECT_BACK = 12;
 		  }
 		
 		  return error;
@@ -3802,188 +3802,6 @@ namespace SimpleBlinky {
 
 
   // Type encoding for connectors
-	class Connection : public Interaction {
-	
-	
-		public:
-		static unsigned int icounter;
-		unsigned int icount = 0;
-		unsigned int sid = 0;
-		
-		
-		bool enabled = false;
-		
-		
-	
-		AT__SURFACES* _atom_5;
-		AT__SURFACES* _atom_8;
-	
-		Connection(AT__SURFACES* _atom_5, AT__SURFACES* _atom_8) {
-			assert(_atom_5 != NULL);
-			this->_atom_5 = _atom_5;
-			assert(_atom_8 != NULL);
-			this->_atom_8 = _atom_8;
-			icount = (icounter++) % INT_MAX;
-			sid    = bipscheduler::TRACE_SID;
-		}
-	
-		void tracename(ostream & out) override {
-			out  << "Connection_" << sid << "_" << icount;
-		}
-	
-		bool isEnabled() override {
-			return enabled;
-		}
-	
-		bool checkSetEnabled() override {
-		
-	
-	
-			enabled = ((_atom_5->_transition__CONNECT_FRONT != 0)  &&  (_atom_8->_transition__CONNECT_BACK != 0));
-	
-	
-			return enabled;
-		}
-		ErrorType execute() {
-			ErrorType error = NO_ERROR;
-			
-			bool _action_1 = (_atom_5->_transition__CONNECT_FRONT != 0);
-			  bool _action_2 = (_atom_8->_transition__CONNECT_BACK != 0);
-			
-			  if (_action_1) {
-			    // execute ports 's.CONNECT_FRONT'
-			    error = _atom_5->port_CONNECT_FRONT();
-			    
-			    if (error != NO_ERROR) {
-			      return error;
-			    }
-			  }
-			
-			  if (_action_2) {
-			    // execute ports 's4.CONNECT_BACK'
-			    error = _atom_8->port_CONNECT_BACK();
-			    
-			    if (error != NO_ERROR) {
-			      return error;
-			    }
-			  }
-	
-			return error;
-		}
-		void print() override {
-			if(enabled)
-				cout << "(Enabled) ";
-	
-			cout << this;
-	
-			cout << " Connection: ";
-	
-			cout << _atom_5;
-			cout << ".";
-			cout << "SyncPort";
-			cout << "(";
-			cout << ")";
-			cout << ", ";
-			cout << _atom_8;
-			cout << ".";
-			cout << "SyncPort";
-			cout << "(";
-			cout << ")";
-		}
-	};
-	unsigned int Connection::icounter = 0;
-
-	class DisconnectCoreAndSurface : public Interaction {
-	
-	
-		public:
-		static unsigned int icounter;
-		unsigned int icount = 0;
-		unsigned int sid = 0;
-		
-		
-		bool enabled = false;
-		
-		
-	
-		AT__CORE* _atom_1;
-		AT__SURFACES* _atom_5;
-	
-		DisconnectCoreAndSurface(AT__CORE* _atom_1, AT__SURFACES* _atom_5) {
-			assert(_atom_1 != NULL);
-			this->_atom_1 = _atom_1;
-			assert(_atom_5 != NULL);
-			this->_atom_5 = _atom_5;
-			icount = (icounter++) % INT_MAX;
-			sid    = bipscheduler::TRACE_SID;
-		}
-	
-		void tracename(ostream & out) override {
-			out  << "DisconnectCoreAndSurface_" << sid << "_" << icount;
-		}
-	
-		bool isEnabled() override {
-			return enabled;
-		}
-	
-		bool checkSetEnabled() override {
-		
-	
-	
-			enabled = ((_atom_1->_transition__CORE_DISASSEMBLE != 0)  &&  (_atom_5->_transition__CONNECT_CORE != 0));
-	
-	
-			return enabled;
-		}
-		ErrorType execute() {
-			ErrorType error = NO_ERROR;
-			
-			bool _action_1 = (_atom_5->_transition__CONNECT_CORE != 0);
-			  bool _action_2 = (_atom_1->_transition__CORE_DISASSEMBLE != 0);
-			
-			  if (_action_1) {
-			    // execute ports 's.CONNECT_CORE'
-			    error = _atom_5->port_CONNECT_CORE();
-			    
-			    if (error != NO_ERROR) {
-			      return error;
-			    }
-			  }
-			
-			  if (_action_2) {
-			    // execute ports 'c.CORE_DISASSEMBLE'
-			    error = _atom_1->port_CORE_DISASSEMBLE();
-			    
-			    if (error != NO_ERROR) {
-			      return error;
-			    }
-			  }
-	
-			return error;
-		}
-		void print() override {
-			if(enabled)
-				cout << "(Enabled) ";
-	
-			cout << this;
-	
-			cout << " DisconnectCoreAndSurface: ";
-	
-			cout << _atom_5;
-			cout << ".";
-			cout << "SyncPort";
-			cout << "(";
-			cout << ")";
-			cout << ", ";
-			cout << _atom_1;
-			cout << ".";
-			cout << "SyncPort";
-			cout << "(";
-			cout << ")";
-		}
-	};
-	unsigned int DisconnectCoreAndSurface::icounter = 0;
-
 	class ConnectCoreAndSurface : public Interaction {
 	
 	
@@ -3997,14 +3815,14 @@ namespace SimpleBlinky {
 		
 		
 	
-		AT__CORE* _atom_2;
-		AT__SURFACES* _atom_6;
+		AT__CORE* _atom_3;
+		AT__SURFACES* _atom_7;
 	
-		ConnectCoreAndSurface(AT__CORE* _atom_2, AT__SURFACES* _atom_6) {
-			assert(_atom_2 != NULL);
-			this->_atom_2 = _atom_2;
-			assert(_atom_6 != NULL);
-			this->_atom_6 = _atom_6;
+		ConnectCoreAndSurface(AT__CORE* _atom_3, AT__SURFACES* _atom_7) {
+			assert(_atom_3 != NULL);
+			this->_atom_3 = _atom_3;
+			assert(_atom_7 != NULL);
+			this->_atom_7 = _atom_7;
 			icount = (icounter++) % INT_MAX;
 			sid    = bipscheduler::TRACE_SID;
 		}
@@ -4021,7 +3839,7 @@ namespace SimpleBlinky {
 		
 	
 	
-			enabled = ((_atom_2->_transition__CORE_ASSEMBLE != 0)  &&  (_atom_6->_transition__CONNECT_CORE != 0));
+			enabled = ((_atom_3->_transition__CORE_ASSEMBLE != 0)  &&  (_atom_7->_transition__CONNECT_CORE != 0));
 	
 	
 			return enabled;
@@ -4029,12 +3847,12 @@ namespace SimpleBlinky {
 		ErrorType execute() {
 			ErrorType error = NO_ERROR;
 			
-			bool _action_1 = (_atom_6->_transition__CONNECT_CORE != 0);
-			  bool _action_2 = (_atom_2->_transition__CORE_ASSEMBLE != 0);
+			bool _action_1 = (_atom_3->_transition__CORE_ASSEMBLE != 0);
+			  bool _action_2 = (_atom_7->_transition__CONNECT_CORE != 0);
 			
 			  if (_action_1) {
-			    // execute ports 's2.CONNECT_CORE'
-			    error = _atom_6->port_CONNECT_CORE();
+			    // execute ports 'c3.CORE_ASSEMBLE'
+			    error = _atom_3->port_CORE_ASSEMBLE();
 			    
 			    if (error != NO_ERROR) {
 			      return error;
@@ -4042,8 +3860,8 @@ namespace SimpleBlinky {
 			  }
 			
 			  if (_action_2) {
-			    // execute ports 'c2.CORE_ASSEMBLE'
-			    error = _atom_2->port_CORE_ASSEMBLE();
+			    // execute ports 's3.CONNECT_CORE'
+			    error = _atom_7->port_CONNECT_CORE();
 			    
 			    if (error != NO_ERROR) {
 			      return error;
@@ -4060,6 +3878,97 @@ namespace SimpleBlinky {
 	
 			cout << " ConnectCoreAndSurface: ";
 	
+			cout << _atom_3;
+			cout << ".";
+			cout << "SyncPort";
+			cout << "(";
+			cout << ")";
+			cout << ", ";
+			cout << _atom_7;
+			cout << ".";
+			cout << "SyncPort";
+			cout << "(";
+			cout << ")";
+		}
+	};
+	unsigned int ConnectCoreAndSurface::icounter = 0;
+
+	class DisconnectCoreAndSurface : public Interaction {
+	
+	
+		public:
+		static unsigned int icounter;
+		unsigned int icount = 0;
+		unsigned int sid = 0;
+		
+		
+		bool enabled = false;
+		
+		
+	
+		AT__CORE* _atom_2;
+		AT__SURFACES* _atom_6;
+	
+		DisconnectCoreAndSurface(AT__CORE* _atom_2, AT__SURFACES* _atom_6) {
+			assert(_atom_2 != NULL);
+			this->_atom_2 = _atom_2;
+			assert(_atom_6 != NULL);
+			this->_atom_6 = _atom_6;
+			icount = (icounter++) % INT_MAX;
+			sid    = bipscheduler::TRACE_SID;
+		}
+	
+		void tracename(ostream & out) override {
+			out  << "DisconnectCoreAndSurface_" << sid << "_" << icount;
+		}
+	
+		bool isEnabled() override {
+			return enabled;
+		}
+	
+		bool checkSetEnabled() override {
+		
+	
+	
+			enabled = ((_atom_2->_transition__CORE_DISASSEMBLE != 0)  &&  (_atom_6->_transition__CONNECT_CORE != 0));
+	
+	
+			return enabled;
+		}
+		ErrorType execute() {
+			ErrorType error = NO_ERROR;
+			
+			bool _action_1 = (_atom_6->_transition__CONNECT_CORE != 0);
+			  bool _action_2 = (_atom_2->_transition__CORE_DISASSEMBLE != 0);
+			
+			  if (_action_1) {
+			    // execute ports 's2.CONNECT_CORE'
+			    error = _atom_6->port_CONNECT_CORE();
+			    
+			    if (error != NO_ERROR) {
+			      return error;
+			    }
+			  }
+			
+			  if (_action_2) {
+			    // execute ports 'c2.CORE_DISASSEMBLE'
+			    error = _atom_2->port_CORE_DISASSEMBLE();
+			    
+			    if (error != NO_ERROR) {
+			      return error;
+			    }
+			  }
+	
+			return error;
+		}
+		void print() override {
+			if(enabled)
+				cout << "(Enabled) ";
+	
+			cout << this;
+	
+			cout << " DisconnectCoreAndSurface: ";
+	
 			cout << _atom_6;
 			cout << ".";
 			cout << "SyncPort";
@@ -4073,7 +3982,98 @@ namespace SimpleBlinky {
 			cout << ")";
 		}
 	};
-	unsigned int ConnectCoreAndSurface::icounter = 0;
+	unsigned int DisconnectCoreAndSurface::icounter = 0;
+
+	class Connection : public Interaction {
+	
+	
+		public:
+		static unsigned int icounter;
+		unsigned int icount = 0;
+		unsigned int sid = 0;
+		
+		
+		bool enabled = false;
+		
+		
+	
+		AT__SURFACES* _atom_5;
+		AT__SURFACES* _atom_6;
+	
+		Connection(AT__SURFACES* _atom_5, AT__SURFACES* _atom_6) {
+			assert(_atom_5 != NULL);
+			this->_atom_5 = _atom_5;
+			assert(_atom_6 != NULL);
+			this->_atom_6 = _atom_6;
+			icount = (icounter++) % INT_MAX;
+			sid    = bipscheduler::TRACE_SID;
+		}
+	
+		void tracename(ostream & out) override {
+			out  << "Connection_" << sid << "_" << icount;
+		}
+	
+		bool isEnabled() override {
+			return enabled;
+		}
+	
+		bool checkSetEnabled() override {
+		
+	
+	
+			enabled = ((_atom_5->_transition__DISCONNECT_RIGHT != 0)  &&  (_atom_6->_transition__DISCONNECT_LEFT != 0));
+	
+	
+			return enabled;
+		}
+		ErrorType execute() {
+			ErrorType error = NO_ERROR;
+			
+			bool _action_1 = (_atom_6->_transition__DISCONNECT_LEFT != 0);
+			  bool _action_2 = (_atom_5->_transition__DISCONNECT_RIGHT != 0);
+			
+			  if (_action_1) {
+			    // execute ports 's2.DISCONNECT_LEFT'
+			    error = _atom_6->port_DISCONNECT_LEFT();
+			    
+			    if (error != NO_ERROR) {
+			      return error;
+			    }
+			  }
+			
+			  if (_action_2) {
+			    // execute ports 's.DISCONNECT_RIGHT'
+			    error = _atom_5->port_DISCONNECT_RIGHT();
+			    
+			    if (error != NO_ERROR) {
+			      return error;
+			    }
+			  }
+	
+			return error;
+		}
+		void print() override {
+			if(enabled)
+				cout << "(Enabled) ";
+	
+			cout << this;
+	
+			cout << " Connection: ";
+	
+			cout << _atom_6;
+			cout << ".";
+			cout << "SyncPort";
+			cout << "(";
+			cout << ")";
+			cout << ", ";
+			cout << _atom_5;
+			cout << ".";
+			cout << "SyncPort";
+			cout << "(";
+			cout << ")";
+		}
+	};
+	unsigned int Connection::icounter = 0;
 
 
 
@@ -4102,66 +4102,18 @@ namespace SimpleBlinky {
 
 		connectors->insert(
 			  	new DisconnectCoreAndSurface(
-					(AT__CORE*) modelroot.components.at(0)
-		, 			(AT__SURFACES*) modelroot.components.at(4)
-				)
-			);
-		connectors->insert(
-			  	new Connection(
-					(AT__SURFACES*) modelroot.components.at(4)
-		, 			(AT__SURFACES*) modelroot.components.at(7)
-				)
-			);
-		connectors->insert(
-			  	new DisconnectCoreAndSurface(
-					(AT__CORE*) modelroot.components.at(3)
-		, 			(AT__SURFACES*) modelroot.components.at(7)
-				)
-			);
-		connectors->insert(
-			  	new DisconnectCoreAndSurface(
-					(AT__CORE*) modelroot.components.at(2)
-		, 			(AT__SURFACES*) modelroot.components.at(6)
-				)
-			);
-		connectors->insert(
-			  	new ConnectCoreAndSurface(
 					(AT__CORE*) modelroot.components.at(1)
 		, 			(AT__SURFACES*) modelroot.components.at(5)
 				)
 			);
 		connectors->insert(
-			  	new ConnectCoreAndSurface(
-					(AT__CORE*) modelroot.components.at(0)
-		, 			(AT__SURFACES*) modelroot.components.at(4)
-				)
-			);
-		connectors->insert(
 			  	new Connection(
 					(AT__SURFACES*) modelroot.components.at(4)
 		, 			(AT__SURFACES*) modelroot.components.at(5)
-				)
-			);
-		connectors->insert(
-			  	new Connection(
-					(AT__SURFACES*) modelroot.components.at(4)
-		, 			(AT__SURFACES*) modelroot.components.at(6)
-				)
-			);
-		connectors->insert(
-			  	new Connection(
-					(AT__SURFACES*) modelroot.components.at(4)
-		, 			(AT__SURFACES*) modelroot.components.at(6)
 				)
 			);
 		connectors->insert(
 			  	new DisconnectCoreAndSurface(
-					(AT__CORE*) modelroot.components.at(1)
-		, 			(AT__SURFACES*) modelroot.components.at(5)
-				)
-			);
-		connectors->insert(
-			  	new ConnectCoreAndSurface(
 					(AT__CORE*) modelroot.components.at(3)
 		, 			(AT__SURFACES*) modelroot.components.at(7)
 				)
@@ -4173,6 +4125,18 @@ namespace SimpleBlinky {
 				)
 			);
 		connectors->insert(
+			  	new ConnectCoreAndSurface(
+					(AT__CORE*) modelroot.components.at(1)
+		, 			(AT__SURFACES*) modelroot.components.at(5)
+				)
+			);
+		connectors->insert(
+			  	new Connection(
+					(AT__SURFACES*) modelroot.components.at(4)
+		, 			(AT__SURFACES*) modelroot.components.at(6)
+				)
+			);
+		connectors->insert(
 			  	new Connection(
 					(AT__SURFACES*) modelroot.components.at(4)
 		, 			(AT__SURFACES*) modelroot.components.at(7)
@@ -4181,7 +4145,43 @@ namespace SimpleBlinky {
 		connectors->insert(
 			  	new Connection(
 					(AT__SURFACES*) modelroot.components.at(4)
+		, 			(AT__SURFACES*) modelroot.components.at(7)
+				)
+			);
+		connectors->insert(
+			  	new DisconnectCoreAndSurface(
+					(AT__CORE*) modelroot.components.at(2)
+		, 			(AT__SURFACES*) modelroot.components.at(6)
+				)
+			);
+		connectors->insert(
+			  	new ConnectCoreAndSurface(
+					(AT__CORE*) modelroot.components.at(0)
+		, 			(AT__SURFACES*) modelroot.components.at(4)
+				)
+			);
+		connectors->insert(
+			  	new Connection(
+					(AT__SURFACES*) modelroot.components.at(4)
 		, 			(AT__SURFACES*) modelroot.components.at(5)
+				)
+			);
+		connectors->insert(
+			  	new ConnectCoreAndSurface(
+					(AT__CORE*) modelroot.components.at(3)
+		, 			(AT__SURFACES*) modelroot.components.at(7)
+				)
+			);
+		connectors->insert(
+			  	new DisconnectCoreAndSurface(
+					(AT__CORE*) modelroot.components.at(0)
+		, 			(AT__SURFACES*) modelroot.components.at(4)
+				)
+			);
+		connectors->insert(
+			  	new Connection(
+					(AT__SURFACES*) modelroot.components.at(4)
+		, 			(AT__SURFACES*) modelroot.components.at(6)
 				)
 			);
 		*/

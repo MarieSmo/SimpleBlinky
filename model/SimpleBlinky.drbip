@@ -8,7 +8,10 @@ import from "SimpleBlinky.cpp" {
     //condition NodeSurfaceRight(SURFACES)
 
     structure SimpleBlinkyMap {
-        bool isAssembled(Node, Node)
+        Node addCore()
+        Node addSurfaces()
+        void eraseCore()
+        void eraseSurfaces()
     }
 
     structure BBMap {
@@ -18,17 +21,24 @@ import from "SimpleBlinky.cpp" {
     }
 }
 
-motif MotifSimple<SimpleBlinkyMap> {
-    rule interaction BlockInitializer(CORE c, SURFACES s)
-    when(!S.isAssembled(@c, @s) ){
+motif MotifSimple<SimpleBlinkyMap, DefaultAddressing> {
+    rule configuration CreateBlinky()
+    when(C.size() < 3){
+        c = new CORE(C.size())
+        nodeCore = S.addCore()
+        (CORE FROM C).insert(c)
+        @.bind(c, nodeCore)
+
+        s = new SURFACES()
+        nodeSurfaces = S.addSurfaces()
+        (SURFACES FROM C).insert(s)
+        @.bind(s, nodeSurfaces)
+
         new ConnectCoreAndSurface(c, s)
     }
 }
 
 initializer {
     b1 = new MotifSimple()
-
-    core = new CORE(1)
-    surfaces = new SURFACES()
-    surfaces2 = new SURFACES()
+    b1.CreateBlinky()
 }

@@ -10,12 +10,12 @@ package SimpleBlinky
 		define b1 b2
 	end
 
-	connector type ConnectCoreAndSurface(SyncPort core, SyncPort surface)
-		define core surface
+	connector type ConnectCoreAndSurface(SyncPort core, SyncPort surfaces)
+		define core surfaces
 	end
 
-	connector type DisconnectCoreAndSurface(SyncPort core, SyncPort surface)
-        define core surface 
+	connector type DisconnectCoreAndSurface(SyncPort core, SyncPort surfaces)
+        define core surfaces
     end
 
 	atom type SURFACES()
@@ -136,12 +136,6 @@ package SimpleBlinky
 					printf("\033[32m[Output]:\033[0m Surfaces disconnected to core\n");
 					isAssembled = !isAssembled;
 				}
-
-
-	  	// Titouan test
-		//on connectSurface from CONNECT to DISCONNECT do {connect = mcu_id;}
-		//on disconnectSurface from DISCONNECT to CONNECT do {connect = 0;}
-		//on initialize from CONNECT to DISCONNECT provided(connect > 0) do {connect = -1;}
 	end
 
 	atom type CORE(int id)

@@ -22,9 +22,9 @@ namespace reconfigure {
         Node * core;
         Node * surfaces;
 
-        bool isAssembled(Node * core, Node * surfaces) {
+        /*bool isAssembled(Node * core, Node * surfaces) {
             return surfaces->_m__isAssembled && core->_m__isAssembled;
-        }
+        }*/
 
         /*SimpleBlinkyMap(AT__MCU* i_mcu, AT__SURFACE* i_surface_left, AT__SURFACE* i_surface_right) {
             mcu = i_mcu;
@@ -32,13 +32,25 @@ namespace reconfigure {
             surface_right = i_surface_right;
         }*/
 
-        /*void addCore(AT__CORE * c) {
-            core = c;
+        Node * addCore() {
+            Node* newNode = new Node();
+            core = newNode;
+            return newNode;
         }
 
-        void addSurfaces(AT__SURFACES * s) {
-            surfaces = s;
-        }*/
+        Node * addSurfaces() {
+            Node* newNode = new Node();
+            surfaces = newNode;
+            return newNode;
+        }
+
+        void eraseCore() {
+            core = NULL;
+        }
+
+        void eraseSurfaces() {
+            surfaces = NULL;
+        }
     };
 
     //BlinkyBlock Map 

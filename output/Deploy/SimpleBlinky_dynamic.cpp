@@ -118,23 +118,19 @@ namespace reconfigure {
         void tracename (ostream & out) override;
         void tracestate(ostream & out) override;
     };
-    class BlockInitializer : public Rule {
+    class CreateBlinky : public Rule {
     public:
         MotifSimple* motif;
-        IPool * connectors;
         static unsigned int icounter;
         int sid;
         int icount;
-        BlockInitializer() {
-            connectors = poolCreate();
+        CreateBlinky() {
             icount = (icounter++) % INT_MAX;
             sid    = bipscheduler::TRACE_SID;
         }
         virtual Motif* getMotif() { return (Motif*) motif; }
     
-        ~BlockInitializer() {
-            cleanup(connectors);
-            poolDelete(connectors);
+        ~CreateBlinky() {
         }
     
         bool execute() {
@@ -142,57 +138,45 @@ namespace reconfigure {
         }
         bool applyAll() {
             bool applied = false;
-            cleanup(connectors);
-            for(auto i_arg_c = motif->comps.S_CORE.begin(); i_arg_c != motif->comps.S_CORE.end(); ++i_arg_c ){
-                auto v_c = *i_arg_c;
-                if(!(!motif->structure.isAssembled(motif->address((AtomType*)v_c), motif->address((AtomType*)v_s)))) continue;
-                for(auto i_arg_s = motif->comps.S_SURFACES.begin(); i_arg_s != motif->comps.S_SURFACES.end(); ++i_arg_s ){
-                    auto v_s = *i_arg_s;
-                    apply(v_c,v_s);
-                    applied = true;
-                }
-            }
+            if(!(motif->comps.size()<5)) return false;
+            apply();
+            applied = true;
             return applied;
         }
-        void apply(AT__CORE* c, AT__SURFACES* s){
-            Interaction * myConnector = new ConnectCoreAndSurface(c, s);
-            connectors->insert(myConnector);
+        void apply(){
             #ifndef PERFMODE
             cout << "<TRACE> <DRBIP> apply ";
             tracename(cout);
-            cout << " with";
-            cout << " ";
-            c->tracename(cout);
-            cout << " ";
-            s->tracename(cout);
-            cout << endl;
-            cout << "<TRACE> <DRBIP> spawn interaction ";
-            myConnector->tracename(cout);
-            cout << " ";
-            c->tracename(cout);
-            cout << " ";
-            s->tracename(cout);
             cout << endl;
             #endif
+            AT__CORE* c=spawnCORE(motif->comps.size());
+            Node* nodeCore=motif->structure.addCore();
+            (motif->comps.S_CORE).insert(c);
+            motif->address.bind(c, nodeCore);
+            AT__SURFACES* s=spawnSURFACES();
+            Node* nodeSurfaces=motif->structure.addSurfaces();
+            (motif->comps.S_SURFACES).insert(s);
+            motif->address.bind(s, nodeSurfaces);
+            new ConnectCoreAndSurface(c, s);
             #ifdef PERFMODE
-            nrules_ir++;
+            nrules_rr++;
             #endif
         }
         bool addTriggers() {
             return false;
         }
     void tracename(ostream & out) {
-        out << "IR BlockInitializer_" << sid << "_" << icount;
+        out << "RR CreateBlinky_" << sid << "_" << icount;
         out << " in ";
         motif->tracename(out);
     }
     };
-    unsigned int BlockInitializer::icounter = 0;
+    unsigned int CreateBlinky::icounter = 0;
     
     MotifSimple::MotifSimple(){
-        BlockInitializer* rule0 = new BlockInitializer();
+        CreateBlinky* rule0 = new CreateBlinky();
         rule0->motif = this;
-        ir.push_back(rule0);
+        cr.push_back(rule0);
         icount = (icounter++) % INT_MAX;
         sid    = bipscheduler::TRACE_SID;
     }
@@ -238,8 +222,6 @@ namespace reconfigure {
 
     void initializer() {
         MotifSimple* b1=spawnMotifSimple();
-        AT__CORE* core=spawnCORE(1);
-        AT__SURFACES* surfaces=spawnSURFACES();
-        AT__SURFACES* surfaces2=spawnSURFACES();
+        ((CreateBlinky*)b1->cr.at(0))->apply();
     }
 }
