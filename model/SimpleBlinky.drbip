@@ -15,15 +15,16 @@ import from "SimpleBlinky.cpp" {
     }
 
     structure BBMap {
-        Node extend()
-        void erase(Node)
-        const bool isNeighbour(Node, Node, int)
+        Node initialize()
+        void insertLeft(Node, Node)
+        bool isNeighbour(Node, Node, int)
+        bool hasNeighbour(Node, int)
     }
 }
 
-motif MotifSimple<SimpleBlinkyMap, DefaultAddressing> {
+motif Block<SimpleBlinkyMap, DefaultAddressing> {
     rule configuration CreateBlinky()
-    when(C.size() < 3){
+    when(true){
         c = new CORE(C.size())
         nodeCore = S.addCore()
         (CORE FROM C).insert(c)
@@ -38,7 +39,25 @@ motif MotifSimple<SimpleBlinkyMap, DefaultAddressing> {
     }
 }
 
+motif Shape<BBMap> {
+    rule configuration Init()
+    when(true) {
+        b1 = new Block()
+        b1.CreateBlinky()
+    }
+}
+
+global rule AddBlock(Shape s, Block b1)
+when(true)
+{
+    b2 = new Block()
+    b2.CreateBlinky()
+    new Connection(b1, b2)
+}
+
 initializer {
-    b1 = new MotifSimple()
-    b1.CreateBlinky()
+    s = new Shape()
+    s.Init()
+
+    AddBlock(s, b)
 }
