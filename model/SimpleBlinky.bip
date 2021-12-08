@@ -6,41 +6,29 @@ package SimpleBlinky
 	port type SyncPort()
 
     //connect block surface to other block's surface
+	connector type init(SyncPort s)
+		define s
+	end
+
 	connector type Connection(SyncPort b1, SyncPort b2)
 		define b1 b2
 	end
 
-	connector type ConnectCoreAndSurface(SyncPort core, SyncPort surfaces)
-		define core surfaces
+	connector type ConnectCoreAndSurface(SyncPort core, SyncPort surface_left, SyncPort surface_right)
+		define core surface_left surface_right
 	end
 
-	connector type DisconnectCoreAndSurface(SyncPort core, SyncPort surfaces)
-        define core surfaces
-    end
+	connector type DisconnectCoreAndSurface(SyncPort core, SyncPort surface_left, SyncPort surface_right)
+		define core surface_left surface_right
+	end
 
-	atom type SURFACES()
-		data bool left = false
-		data bool right = false
-		data bool top = false
-		data bool bottom = false
-		data bool front = false
-		data bool back = false
-
+	atom type SURFACE()
+		data bool connect = false
 		data bool isAssembled = false
 
 		// SEED connection and deconnection (output signal in parent block)
-		export port SyncPort CONNECT_LEFT()
-        export port SyncPort DISCONNECT_LEFT()
-		export port SyncPort CONNECT_RIGHT()
-		export port SyncPort DISCONNECT_RIGHT()
-		export port SyncPort CONNECT_TOP()
-        export port SyncPort DISCONNECT_TOP()
-		export port SyncPort CONNECT_BOTTOM()
-        export port SyncPort DISCONNECT_BOTTOM()
-		export port SyncPort CONNECT_FRONT()
-        export port SyncPort DISCONNECT_FRONT()
-		export port SyncPort CONNECT_BACK()
-        export port SyncPort DISCONNECT_BACK()
+		export port SyncPort CONNECT()
+        export port SyncPort DISCONNECT()
 
 		export port SyncPort CONNECT_CORE()
 
@@ -49,79 +37,19 @@ package SimpleBlinky
 		initial to DISCONNECTED
 
 		// SURFACE instruction for left and right surface when state change
-		on CONNECT_LEFT from DISCONNECTED to CONNECTED
-			provided( !left )
+		on CONNECT from DISCONNECTED to CONNECTED
+			provided( !connect )
 				do {
 				    printf("\033[32m[Output]:\033[0m Left has been connected\n");
-					left = !left;
-				}
-		on CONNECT_RIGHT from DISCONNECTED to CONNECTED 
-			provided( !right )
-				do {
-					printf("\033[32m[Output]:\033[0m Right has been connected\n");
-					right = !right;
-				}
-		on CONNECT_TOP from DISCONNECTED to CONNECTED 
-			provided( !top )
-				do {
-					printf("\033[32m[Output]:\033[0m Top has been connected\n");
-					top = !top;
-				}
-		on CONNECT_BOTTOM from DISCONNECTED to CONNECTED 
-			provided( !bottom )
-				do {
-					printf("\033[32m[Output]:\033[0m Bottom has been connected\n");
-					bottom = !bottom;
-				}
-		on CONNECT_FRONT from DISCONNECTED to CONNECTED 
-			provided( !front )
-				do {
-					printf("\033[32m[Output]:\033[0m Front has been connected\n");
-					front = !front;
-				}
-		on CONNECT_BACK from DISCONNECTED to CONNECTED 
-			provided( !back )
-				do {
-					printf("\033[32m[Output]:\033[0m Back has been connected\n");
-					back = !back;
+					connect = !connect;
 				}
 
 		// SURFACE instruction when disconnected
-		on DISCONNECT_LEFT from CONNECTED to DISCONNECTED
-			provided( left )
+		on DISCONNECT from CONNECTED to DISCONNECTED
+			provided( connect )
 				do {
 					printf("\033[32m[Output]:\033[0m Left has been disconnected\n");
-					left = !left ;
-				}
-      	on DISCONNECT_RIGHT from CONNECTED to DISCONNECTED
-		  	provided( right )
-				do {
-					printf("\033[32m[Output]:\033[0m Right has been disconnected\n");
-					right = !right;
-				}
-		on DISCONNECT_TOP from CONNECTED to DISCONNECTED
-		  	provided( top )
-				do {
-					printf("\033[32m[Output]:\033[0m Top has been disconnected\n");
-					top = !top;
-				}
-		on DISCONNECT_BOTTOM from CONNECTED to DISCONNECTED 
-			provided( bottom )
-				do {
-					printf("\033[32m[Output]:\033[0m Bottom has been disconnected\n");
-					bottom = !bottom;
-				}
-		on DISCONNECT_FRONT from CONNECTED to DISCONNECTED 
-			provided( front )
-				do {
-					printf("\033[32m[Output]:\033[0m Front has been disconnected\n");
-					front = !front;
-				}
-		on DISCONNECT_BACK from CONNECTED to DISCONNECTED 
-			provided( back )
-				do {
-					printf("\033[32m[Output]:\033[0m Back has been disconnected\n");
-					back = !back;
+					connect = !connect ;
 				}
 
 		on CONNECT_CORE from CONNECTED to DISCONNECTED
@@ -130,6 +58,7 @@ package SimpleBlinky
 					printf("\033[32m[Output]:\033[0m Surfaces connected to core\n");
 					isAssembled = !isAssembled;
 				}
+
 		on CONNECT_CORE from DISCONNECTED to CONNECTED
             provided ( !isAssembled )
 				do {
@@ -162,35 +91,23 @@ package SimpleBlinky
 
 	end
 
-
 	compound type SYS()
-		component CORE c(1)
+		component CORE c1(1)
+		component SURFACE s1_left()
+		component SURFACE s1_right()
+
 		component CORE c2(2)
-		component CORE c3(3)
-		component CORE c4(4)
+		component SURFACE s2_left()
+		component SURFACE s2_right()
 
-		component SURFACES s()
-		component SURFACES s2()
-		component SURFACES s3()
-		component SURFACES s4()
+		connector ConnectCoreAndSurface assemble_block_1(c1.CORE_ASSEMBLE, s1_left.CONNECT_CORE, s1_right.CONNECT_CORE)
+		connector ConnectCoreAndSurface assemble_block_2(c2.CORE_ASSEMBLE, s2_left.CONNECT_CORE, s2_right.CONNECT_CORE)
 
-		connector ConnectCoreAndSurface assemble_block_1(c.CORE_ASSEMBLE, s.CONNECT_CORE)
-		connector ConnectCoreAndSurface assemble_block_2(c2.CORE_ASSEMBLE, s2.CONNECT_CORE)
-		connector ConnectCoreAndSurface assemble_block_3(c3.CORE_ASSEMBLE, s3.CONNECT_CORE)
-		connector ConnectCoreAndSurface assemble_block_4(c4.CORE_ASSEMBLE, s4.CONNECT_CORE)
+		connector Connection connect_block_1_2(s1_left.CONNECT, s2_right.CONNECT)
+		connector Connection disconnect_block_1_2(s1_left.DISCONNECT, s2_right.DISCONNECT)
 
-		connector Connection connect_block_1_2(s.CONNECT_LEFT, s2.CONNECT_RIGHT)
-		connector Connection connect_block_1_3(s.CONNECT_TOP, s3.CONNECT_BOTTOM)
-		connector Connection connect_block_1_4(s.CONNECT_FRONT, s4.CONNECT_BACK)
-
-		connector Connection disconnect_block_1_2(s.DISCONNECT_RIGHT, s2.DISCONNECT_LEFT)
-		connector Connection disconnect_block_1_3(s.DISCONNECT_TOP, s3.DISCONNECT_BOTTOM)
-		connector Connection disconnect_block_1_4(s.DISCONNECT_FRONT, s4.DISCONNECT_BACK)
-
-		connector DisconnectCoreAndSurface disassemble_block_1(c.CORE_DISASSEMBLE, s.CONNECT_CORE)
-		connector DisconnectCoreAndSurface disassemble_block_2(c2.CORE_DISASSEMBLE, s2.CONNECT_CORE)
-		connector DisconnectCoreAndSurface disassemble_block_3(c3.CORE_DISASSEMBLE, s3.CONNECT_CORE)
-		connector DisconnectCoreAndSurface disassemble_block_4(c4.CORE_DISASSEMBLE, s4.CONNECT_CORE)
+		connector DisconnectCoreAndSurface disassemble_block_1(c1.CORE_DISASSEMBLE, s1_left.CONNECT_CORE, s1_right.CONNECT_CORE)
+		connector DisconnectCoreAndSurface disassemble_block_2(c2.CORE_DISASSEMBLE, s2_left.CONNECT_CORE, s2_right.CONNECT_CORE)
 	end
 
 end

@@ -3,61 +3,86 @@ model SimpleBlinky
 import from "SimpleBlinky.cpp" {
 
     condition NodeCore(CORE)
-    condition NodeSurface(SURFACES)
-    //condition NodeSurfaceLeft(SURFACES)
-    //condition NodeSurfaceRight(SURFACES)
+    condition NodeSurfaceLeft(SURFACE)
+    condition NodeSurfaceRight(SURFACE)
 
     structure SimpleBlinkyMap {
-        Node addCore()
-        Node addSurfaces()
-        void eraseCore()
-        void eraseSurfaces()
+        Node create()
+        void setCore(Node)
+        void setSurfaceLeft(Node)
+        void setSurfaceRight(Node)
+        const Node getCore()
+        const Node getLeft()
+        const Node getRight()
+        const bool isCore(Node)
+        const bool isLeft(Node)
+        const bool isRight(Node)
     }
 
     structure BBMap {
-        Node initialize()
+        void insertCore(Node)
         void insertLeft(Node, Node)
-        bool isNeighbour(Node, Node, int)
-        bool hasNeighbour(Node, int)
+        void insertRight(Node, Node)
+        const bool isNeighbour(Node, Node, int)
+        const bool hasNeighbour(Node, int)
+    }
+
+    addressing BBAddressing {
     }
 }
 
 motif Block<SimpleBlinkyMap, DefaultAddressing> {
-    rule configuration CreateBlinky()
-    when(true){
-        c = new CORE(C.size())
-        nodeCore = S.addCore()
-        (CORE FROM C).insert(c)
-        @.bind(c, nodeCore)
-
-        s = new SURFACES()
-        nodeSurfaces = S.addSurfaces()
-        (SURFACES FROM C).insert(s)
-        @.bind(s, nodeSurfaces)
-
-        new ConnectCoreAndSurface(c, s)
+    rule interaction AssembledLeft(CORE core, SURFACE left, SURFACE right)
+    when(S.isCore(@core), S.isLeft(@left), S.isRight(@right)){
+        new ConnectCoreAndSurface(core, left, right)
     }
 }
 
-motif Shape<BBMap> {
-    rule configuration Init()
+motif Shape<BBMap, BBAddressing> {
+    rule interaction connectSurface(SURFACE s1, SURFACE s2)
     when(true) {
-        b1 = new Block()
-        b1.CreateBlinky()
+        new Connection(s1, s2)
     }
 }
 
-global rule AddBlock(Shape s, Block b1)
-when(true)
-{
-    b2 = new Block()
-    b2.CreateBlinky()
-    new Connection(b1, b2)
+global rule AddLeftBlock(Block b1, Block b2, CORE c1, CORE c2, SURFACE left, SURFACE right, Shape shape)
+when(true,
+    NodeSurfaceLeft(left)
+) {
+    shape.connectSurface(left, right)
 }
 
 initializer {
-    s = new Shape()
-    s.Init()
+    shape = new Shape()
+    
+    for(i : seq(0, 3)) {
+        block = new Block()
 
-    AddBlock(s, b)
+        // Core
+        c = new CORE(i)
+        nodeCore = block.S.create()
+        block.@.bind(c, nodeCore)
+        block.S.setCore(@c)
+        (CORE FROM block.C).insert(c)
+
+        nodeCore = shape.S.create()
+        shape.@.bind(c, nodeCore)
+        shape.S.insertCore(@c)
+        (CORE FROM shape.C).insert(c)
+
+        // Surface left
+        sl = new SURFACE()
+        NodeSurfaceLeft = block.S.create()
+        block.@.bind(sl, NodeSurfaceLeft)
+        block.S.setSurfaceLeft(@sl)
+        (SURFACE FROM block.C).insert(sl)
+
+        // Surface right
+        sr = new SURFACE()
+        NodeSurfaceRight = block.S.create()
+        block.@.bind(sr, NodeSurfaceRight)
+        block.S.setSurfaceRight(@sr)
+        (SURFACE FROM block.C).insert(sr)
+
+  }
 }

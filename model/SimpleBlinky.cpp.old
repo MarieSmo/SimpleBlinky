@@ -31,50 +31,43 @@ namespace reconfigure {
         Node * surface_left;
         Node * surface_right;
 
-        Node * create() {
-            return new Node();
-        }
-        
-        void setCore(Node * c) {
-            this->core = c;
+        Node * addCore() {
+            Node* newNode = new Node();
+            core = newNode;
+            return newNode;
         }
 
-        void setSurfaceLeft(Node * s) {
-            this->surface_left = s;
+        Node * addLeftSurface() {
+            Node* newNode = new Node();
+            surface_left = newNode;
+            return newNode;
         }
 
-        void setSurfaceRight(Node * s) {
-            this->surface_right = s;
+        Node * addRightSurface() {
+            Node* newNode = new Node();
+            surface_right = newNode;
+            return newNode;
+        }
+
+        void eraseCore() {
+            core = NULL;
+        }
+
+        void eraseSurfaces() {
+            surface_left = NULL;
+            surface_right = NULL;
         }
 
         Node * getCore() {
             return core;
         }
 
-        Node * getLeft() {
+        Node * getSurfaceLeft() {
             return surface_left;
         }
 
-        Node * getRight() {
+        Node * getSurfaceRight() {
             return surface_right;
-        }
-
-        bool isCore(Node * node) {
-            return node == core;
-        }
-
-        bool isLeft(Node * node) {
-            return node == surface_left;
-        }
-
-        bool isRight(Node * node) {
-            return node == surface_right;
-        }
-
-        ~SimpleBlinkyMap() {
-            delete core;
-            delete surface_left;
-            delete surface_right;
         }
     };
 
@@ -84,24 +77,30 @@ namespace reconfigure {
         typedef struct surface {
             struct surface *left;
             struct surface *right;
-            } surfaces;
+            struct surface *top;
+            struct surface *bottom;
+            struct surface *front;
+            struct surface *back;
+        } surfaces;
 
         surfaces * initSurfaces() {
             surfaces *l = new surfaces;
             l->left = NULL;
             l->right = NULL;
+            l->top = NULL;
+            l->bottom = NULL;
+            l->front = NULL;
+            l->back = NULL;
             return l;
         }
 
         public:
         map<Node*, surfaces*> blocks;
 
-        Node * create() {
-            return new Node();
-        }
-
-        void insertCore(Node * node) {
-            blocks.insert(pair<Node*, surfaces*>(node, initSurfaces()));
+        Node * initialize() {
+            Node* newNode = new Node();
+            blocks.insert(pair<Node*, surfaces*>(newNode, initSurfaces()));
+            return newNode;
         }
 
         void insertLeft(Node *from, Node *newNode) {
@@ -113,6 +112,10 @@ namespace reconfigure {
             s->left = (surfaces*) malloc(sizeof(surfaces));
             (s->left)->left = NULL;
             (s->left)->right = s;
+            (s->left)->top = NULL;
+            (s->left)->bottom = NULL;
+            (s->left)->front = NULL;
+            (s->left)->back = NULL;
             
             blocks.insert(pair<Node*, surfaces*>(newNode, s->left));
         }
@@ -126,16 +129,15 @@ namespace reconfigure {
             s->right = (surfaces*) malloc(sizeof(surfaces));
             (s->right)->left = s;
             (s->right)->right = NULL;
+            (s->right)->top = NULL;
+            (s->right)->bottom = NULL;
+            (s->right)->front = NULL;
+            (s->right)->back = NULL;
             
             blocks.insert(pair<Node*, surfaces*>(newNode, s->left));
         }
 
-        void assign(BBMap * bbmap) {
-            blocks.clear();
-            blocks = bbmap->blocks;
-        }
-
-                //Direction: 1 left, 2 right, 3 top, 4 bottom, 5 front, 6 back
+        //Direction: 1 left, 2 right, 3 top, 4 bottom, 5 front, 6 back
         bool isNeighbour(Node *n1, Node *n2, int direction) {
             if(n1 && n2) {
                 switch (direction) {
@@ -145,6 +147,22 @@ namespace reconfigure {
                 
                 case 2:
                     (blocks.find(n1)->second->right == blocks.find(n2)->second ) ? true : false; 
+                    break;
+
+                case 3:
+                (blocks.find(n1)->second->top == blocks.find(n2)->second ) ? true : false; 
+                    break;
+
+                case 4:
+                    (blocks.find(n1)->second->bottom == blocks.find(n2)->second ) ? true : false; 
+                    break;
+                
+                case 5:
+                    (blocks.find(n1)->second->front == blocks.find(n2)->second ) ? true : false; 
+                    break;
+                
+                case 6:
+                    (blocks.find(n1)->second->back == blocks.find(n2)->second ) ? true : false; 
                     break;
 
                 default:
@@ -165,6 +183,18 @@ namespace reconfigure {
                 break;
             case 2:
                 (blocks.find(n)->second->right != NULL) ? true : false; 
+                break;
+            case 3:
+                (blocks.find(n)->second->top != NULL) ? true : false; 
+                break;
+            case 4:
+                (blocks.find(n)->second->bottom != NULL) ? true : false; 
+                break;
+            case 5:
+                (blocks.find(n)->second->front != NULL) ? true : false; 
+                break;
+            case 6:
+                (blocks.find(n)->second->back != NULL) ? true : false; 
                 break;
             default:
                 return false;
@@ -187,6 +217,18 @@ namespace reconfigure {
                 return value->second;
             else
                 return NULL;
+        }
+
+        AT__CORE* findCore(SimpleBlinkyMap & map) {
+            Node * core = map.getCore();
+            assert(core != NULL);
+
+            for(auto elem = nodeMap.begin(); elem != nodeMap.end(); ++elem)
+                if(elem->second == core)
+                    return (AT__CORE*) elem->first;
+
+            assert(false);            
+            return NULL;
         }
     };
 }
