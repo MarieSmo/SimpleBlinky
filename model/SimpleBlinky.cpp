@@ -104,31 +104,17 @@ namespace reconfigure {
             blocks.insert(pair<Node*, surfaces*>(node, initSurfaces()));
         }
 
-        void insertLeft(Node *from, Node *newNode) {
-            surfaces *s = blocks.find(from)->second;
-            if(s->left) {
-                printf("Left already connected");
-                return;
-            }
-            s->left = (surfaces*) malloc(sizeof(surfaces));
-            (s->left)->left = NULL;
-            (s->left)->right = s;
-            
-            blocks.insert(pair<Node*, surfaces*>(newNode, s->left));
+        void connectLeft(Node *left, Node *right) {
+            surfaces * sLeft = blocks.find(left)->second;
+            surfaces * sRight = blocks.find(right)->second;
+
+            sLeft->left = sRight;
+            sRight->right = sLeft;
         }
 
-        void insertRight(Node *from, Node *newNode) {
-            surfaces *s = blocks.find(from)->second;
-            if(s->right) {
-                printf("Left already connected");
-                return;
-            }
-            s->right = (surfaces*) malloc(sizeof(surfaces));
-            (s->right)->left = s;
-            (s->right)->right = NULL;
-            
-            blocks.insert(pair<Node*, surfaces*>(newNode, s->left));
-        }
+        /*void connectRight(Node *right, Node *left) {
+            connectLeft(left, right);    
+        }*/
 
         void assign(BBMap * bbmap) {
             blocks.clear();
@@ -140,11 +126,11 @@ namespace reconfigure {
             if(n1 && n2) {
                 switch (direction) {
                 case 1:
-                    (blocks.find(n1)->second->left == blocks.find(n2)->second ) ? true : false; 
+                    return blocks.find(n1)->second->left == blocks.find(n2)->second;
                     break;
                 
                 case 2:
-                    (blocks.find(n1)->second->right == blocks.find(n2)->second ) ? true : false; 
+                    return blocks.find(n1)->second->right == blocks.find(n2)->second; 
                     break;
 
                 default:
@@ -156,15 +142,26 @@ namespace reconfigure {
         }
 
         //Direction: 1 left, 2 right, 3 top, 4 bottom, 5 front, 6 back
-        bool hasNeighbour(Node *n, int direction) {
-            if(!n) return false;
+        bool hasNeighbour(Node *node, int direction) {
+            if(!node) return false;
+            surfaces *surface = blocks.find(node)->second;
 
             switch (direction) {
             case 1:
-                (blocks.find(n)->second->left != NULL) ? true : false; 
+                if(surface->left) {
+                    printf("\033[32m[Output]:\033[0m Left already connected\n");
+                    return true;
+                }
+                printf("\033[32m[Output]:\033[0m Left not yet connected\n");
+                return false;
                 break;
             case 2:
-                (blocks.find(n)->second->right != NULL) ? true : false; 
+                if(surface->right) {
+                    printf("\033[32m[Output]:\033[0m Right already connected\n");
+                    return true;
+                }
+                printf("\033[32m[Output]:\033[0m Right not yet connected\n");
+                return false;
                 break;
             default:
                 return false;
