@@ -3,42 +3,90 @@ model SimpleBlinky
 import from "SimpleBlinky.cpp" {
 
     condition NodeCore(CORE)
-    condition NodeSurface(SURFACES)
-    //condition NodeSurfaceLeft(SURFACES)
-    //condition NodeSurfaceRight(SURFACES)
+    condition NodeSurfaceLeft(SURFACE)
+    condition NodeSurfaceRight(SURFACE)
 
     structure SimpleBlinkyMap {
-        Node addCore()
-        Node addSurfaces()
-        void eraseCore()
-        void eraseSurfaces()
+        Node create()
+        void setCore(Node)
+        void setSurfaceLeft(Node)
+        void setSurfaceRight(Node)
+        const Node getCore()
+        const Node getLeft()
+        const Node getRight()
+        const bool isCore(Node)
+        const bool isLeft(Node)
+        const bool isRight(Node)
     }
 
     structure BBMap {
-        Node extend()
-        void erase(Node)
+        void insertCore(Node)
+        void insertLeft(Node, Node)
+        void insertRight(Node, Node)
         const bool isNeighbour(Node, Node, int)
+        const bool hasNeighbour(Node, int)
+    }
+
+    addressing BBAddressing {
     }
 }
 
-motif MotifSimple<SimpleBlinkyMap, DefaultAddressing> {
-    rule configuration CreateBlinky()
-    when(C.size() < 3){
-        c = new CORE(C.size())
-        nodeCore = S.addCore()
-        (CORE FROM C).insert(c)
-        @.bind(c, nodeCore)
-
-        s = new SURFACES()
-        nodeSurfaces = S.addSurfaces()
-        (SURFACES FROM C).insert(s)
-        @.bind(s, nodeSurfaces)
-
-        new ConnectCoreAndSurface(c, s)
+motif Block<SimpleBlinkyMap, DefaultAddressing> {
+    rule interaction Assembled(CORE core, SURFACE left, SURFACE right)
+    when(S.isCore(@core), S.isLeft(@left), S.isRight(@right)){
+        new ConnectCoreAndSurface(core, left, right)
     }
+}
+
+motif Shape<BBMap, BBAddressing> {
+    rule interaction connectSurface(SURFACE s1, SURFACE s2)
+    when(true) {
+        new Connection(s1, s2)
+    }
+}
+
+global rule AddLeftBlock(Shape shape, Block b1, Block b2, CORE c1, CORE c2, SURFACE sl, SURFACE sr)
+when(false
+) 
+{
+    shape.connectSurface(sl, sr)
 }
 
 initializer {
-    b1 = new MotifSimple()
-    b1.CreateBlinky()
+    shape = new Shape()
+    
+    for(i : seq(0, 3)) {
+        block = new Block()
+
+        // Core
+        core = new CORE(i)
+
+        nodeCore = block.S.create()
+        nodeCore = shape.S.create()
+
+        block.S.setCore(nodeCore)
+        shape.S.insertCore(nodeCore)
+
+        block.@.bind(core, nodeCore)
+        shape.@.bind(core, nodeCore)
+
+        (CORE FROM block.C).insert(core)
+        (CORE FROM shape.C).insert(core)
+
+        // Surface left
+        sl = new SURFACE()
+        NodeSL = block.S.create()
+        block.@.bind(sl, NodeSL)
+        block.S.setSurfaceLeft(NodeSL)
+        (SURFACE FROM block.C).insert(sl)
+
+        // Surface right
+        sr = new SURFACE()
+        NodeSR = block.S.create()
+        block.@.bind(sr, NodeSR)
+        block.S.setSurfaceRight(NodeSR)
+        (SURFACE FROM block.C).insert(sr)
+
+        
+  }
 }
