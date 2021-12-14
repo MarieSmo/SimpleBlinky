@@ -79,16 +79,14 @@ initializer {
         // Core
         core = new CORE(i)
 
-        nodeCore = block.S.create()
-        nodeCore = shape.S.create()
-
-        block.S.setCore(nodeCore)
-        shape.S.insertCore(nodeCore)
-
-        block.@.bind(core, nodeCore)
-        shape.@.bind(core, nodeCore)
-
+        nodeCoreBlock = block.S.create()
+        block.S.setCore(nodeCoreBlock)
+        block.@.bind(core, nodeCoreBlock)
         (CORE FROM block.C).insert(core)
+
+        nodeCoreShape = shape.S.create()
+        shape.S.insertCore(nodeCoreShape)
+        shape.@.bind(core, nodeCoreShape)
         (CORE FROM shape.C).insert(core)
 
         // Surface left
