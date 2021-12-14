@@ -1,7 +1,10 @@
-@cpp(include="stdio.h")
+@cpp(include="ext.cpp")
 package SimpleBlinky
 	extern function printf(string)
 	extern function printf(string, int)
+
+	extern function printf(string, string)
+	extern function string connection(int)
 
 	port type SurfacePort()
 	port type CorePort(bool isAssembled)
@@ -20,32 +23,30 @@ package SimpleBlinky
 
 	connector type DisconnectCoreAndSurface(CorePort core, SurfacePort surface_left, SurfacePort surface_right)
 		define core surface_left surface_right
-		on core surface_left surface_right
-			down {
-				core.isAssembled = false;
-			}
 	end
 
-	atom type SURFACE()
+	// ID represent the type of the surface
+	// 		1: left
+	//		2: right
+	atom type SURFACE(int surface_id)
 		data bool connect = false
 		data bool isAssembled = false
 
-		// Surface connection and deconnection
+		// SEED connection and deconnection (output signal in parent block)
 		export port SurfacePort CONNECT()
         export port SurfacePort DISCONNECT()
-		// Core assemble and disassemble
 		export port SurfacePort CONNECT_CORE()
 		export port SurfacePort DISCONNECT_CORE()
 
         //possible states for all surface ports
-		place DISCONNECTED, CONNECTED, ASSEMBLED, DISASSEMBLED
+		place DISCONNECTED, CONNECTED
 		initial to DISCONNECTED
 
 		// SURFACE instruction for left and right surface when state change
 		on CONNECT from DISCONNECTED to CONNECTED
 			provided( !connect )
 				do {
-				    printf("\033[32m[Surface]:\033[0m Connected\n");
+				    printf("\033[32m[Surface %s]:\033[0m Connected\n", connection(surface_id));
 					connect = !connect;
 				}
 
@@ -53,21 +54,21 @@ package SimpleBlinky
 		on DISCONNECT from CONNECTED to DISCONNECTED
 			provided( connect )
 				do {
-					printf("\033[32m[Surface]:\033[0m Disconnected\n");
+					printf("\033[32m[Surface %s]:\033[0m Disconnected\n", connection(surface_id));
 					connect = !connect ;
 				}
 
-		on CONNECT_CORE from DISASSEMBLED to ASSEMBLED
-			provided( isAssembled )
+		on CONNECT_CORE from DISCONNECTED to CONNECTED
+            provided ( !isAssembled )
 				do {
-					printf("\033[32m[Surface]:\033[0m Surfaces assembled to Core\n");
+					printf("\033[32m[Surface %s]:\033[0m Connected to core\n", connection(surface_id));
 					isAssembled = !isAssembled;
 				}
 
-		on DISCONNECT_CORE from ASSEMBLED to DISASSEMBLED
-            provided ( !isAssembled )
+		on DISCONNECT_CORE from CONNECTED to DISCONNECTED
+			provided( isAssembled )
 				do {
-					printf("\033[32m[Surface]:\033[0m Surfaces disassembled to Core\n");
+					printf("\033[32m[Surface %s]:\033[0m Disconnected to core\n", connection(surface_id));
 					isAssembled = !isAssembled;
 				}
 	end
@@ -75,21 +76,21 @@ package SimpleBlinky
 	atom type CORE(int id)
 		data bool isAssembled = false
 
-		export port CorePort ASSEMBLE(isAssembled)
-    	export port CorePort DISASSEMBLE(isAssembled)
+		export port CorePort CORE_ASSEMBLE(isAssembled)
+    	export port CorePort CORE_DISASSEMBLE(isAssembled)
 
 		place ASSEMBLED, DISASSEMBLED
 		initial to DISASSEMBLED
 
-		on ASSEMBLE from DISASSEMBLED to ASSEMBLED
+		on CORE_ASSEMBLE from DISASSEMBLED to ASSEMBLED
 			do {
-				printf("\033[32mBlock %d\033[0m assembled\n", id);
+				printf("\033[32m[Block %d]\033[0m Assembled\n", id);
 				isAssembled = true;				
 			}
 
-		on DISASSEMBLE from ASSEMBLED to DISASSEMBLED 
+		on CORE_DISASSEMBLE from ASSEMBLED to DISASSEMBLED 
 			do{
-				printf("\033[32mBlock %d\033[0m disassembled\n", id);
+				printf("\033[32m[Block %d]\033[0m Disassembled\n", id);
 				isAssembled = false;
 			}
 
@@ -97,21 +98,21 @@ package SimpleBlinky
 
 	compound type SYS()
 		component CORE c1(1)
-		component SURFACE s1_left()
-		component SURFACE s1_right()
+		component SURFACE s1_left(4)
+		component SURFACE s1_right(8)
 
 		component CORE c2(2)
-		component SURFACE s2_left()
-		component SURFACE s2_right()
+		component SURFACE s2_left(4)
+		component SURFACE s2_right(8)
 
-		connector ConnectCoreAndSurface assemble_block_1(c1.ASSEMBLE, s1_left.CONNECT_CORE, s1_right.CONNECT_CORE)
-		connector ConnectCoreAndSurface assemble_block_2(c2.ASSEMBLE, s2_left.CONNECT_CORE, s2_right.CONNECT_CORE)
+		connector ConnectCoreAndSurface assemble_block_1(c1.CORE_ASSEMBLE, s1_left.CONNECT_CORE, s1_right.CONNECT_CORE)
+		connector ConnectCoreAndSurface assemble_block_2(c2.CORE_ASSEMBLE, s2_left.CONNECT_CORE, s2_right.CONNECT_CORE)
 
 		connector Connection connect_block_1_2(s1_left.CONNECT, s2_right.CONNECT)
 		connector Connection disconnect_block_1_2(s1_left.DISCONNECT, s2_right.DISCONNECT)
 
-		connector DisconnectCoreAndSurface disassemble_block_1(c1.DISASSEMBLE, s1_left.DISCONNECT_CORE, s1_right.DISCONNECT_CORE)
-		connector DisconnectCoreAndSurface disassemble_block_2(c2.DISASSEMBLE, s2_left.DISCONNECT_CORE, s2_right.DISCONNECT_CORE)
+		connector DisconnectCoreAndSurface disassemble_block_1(c1.CORE_DISASSEMBLE, s1_left.DISCONNECT_CORE, s1_right.DISCONNECT_CORE)
+		connector DisconnectCoreAndSurface disassemble_block_2(c2.CORE_DISASSEMBLE, s2_left.DISCONNECT_CORE, s2_right.DISCONNECT_CORE)
 	end
 
 end

@@ -90,14 +90,14 @@ initializer {
         (CORE FROM shape.C).insert(core)
 
         // Surface left
-        sl = new SURFACE()
+        sl = new SURFACE(4)
         NodeSL = block.S.create()
         block.@.bind(sl, NodeSL)
         block.S.setSurfaceLeft(NodeSL)
         (SURFACE FROM block.C).insert(sl)
 
         // Surface right
-        sr = new SURFACE()
+        sr = new SURFACE(8)
         NodeSR = block.S.create()
         block.@.bind(sr, NodeSR)
         block.S.setSurfaceRight(NodeSR)
