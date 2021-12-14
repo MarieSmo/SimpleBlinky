@@ -3,22 +3,22 @@ package SimpleBlinky
 	extern function printf(string)
 	extern function printf(string, int)
 
-	port type SyncPort()
+	port type SurfacePort()
+	port type CorePort(bool isAssembled)
 
-    //connect block surface to other block's surface
-	connector type init(SyncPort s)
-		define s
-	end
-
-	connector type Connection(SyncPort b1, SyncPort b2)
+	connector type Connection(SurfacePort b1, SurfacePort b2)
 		define b1 b2
 	end
 
-	connector type ConnectCoreAndSurface(SyncPort core, SyncPort surface_left, SyncPort surface_right)
+	connector type ConnectCoreAndSurface(CorePort core, SurfacePort surface_left, SurfacePort surface_right)
 		define core surface_left surface_right
+		on core surface_left surface_right
+			down {
+				core.isAssembled = true;
+			}
 	end
 
-	connector type DisconnectCoreAndSurface(SyncPort core, SyncPort surface_left, SyncPort surface_right)
+	connector type DisconnectCoreAndSurface(CorePort core, SurfacePort surface_left, SurfacePort surface_right)
 		define core surface_left surface_right
 	end
 
@@ -26,21 +26,22 @@ package SimpleBlinky
 		data bool connect = false
 		data bool isAssembled = false
 
-		// SEED connection and deconnection (output signal in parent block)
-		export port SyncPort CONNECT()
-        export port SyncPort DISCONNECT()
-
-		export port SyncPort CONNECT_CORE()
+		// Surface connection and deconnection
+		export port SurfacePort CONNECT()
+        export port SurfacePort DISCONNECT()
+		// Core assemble and disassemble
+		export port CorePort ASSEMBLE()
+		export port CorePort DISASSEMBLE()
 
         //possible states for all surface ports
-		place DISCONNECTED, CONNECTED
+		place DISCONNECTED, CONNECTED, ASSEMBLED, DISASSEMBLED
 		initial to DISCONNECTED
 
 		// SURFACE instruction for left and right surface when state change
 		on CONNECT from DISCONNECTED to CONNECTED
 			provided( !connect )
 				do {
-				    printf("\033[32m[Output]:\033[0m Left has been connected\n");
+				    printf("\033[32m[Surface]:\033[0m Connected\n");
 					connect = !connect;
 				}
 
@@ -48,21 +49,21 @@ package SimpleBlinky
 		on DISCONNECT from CONNECTED to DISCONNECTED
 			provided( connect )
 				do {
-					printf("\033[32m[Output]:\033[0m Left has been disconnected\n");
+					printf("\033[32m[Surface]:\033[0m Disconnected\n");
 					connect = !connect ;
 				}
 
-		on CONNECT_CORE from CONNECTED to DISCONNECTED
+		on ASSEMBLE from DISASSEMBLED to ASSEMBLED
 			provided( isAssembled )
 				do {
-					printf("\033[32m[Output]:\033[0m Surfaces connected to core\n");
+					printf("\033[32m[Surface]:\033[0m Surfaces assembled to Core\n");
 					isAssembled = !isAssembled;
 				}
 
-		on CONNECT_CORE from DISCONNECTED to CONNECTED
+		on DISASSEMBLE from ASSEMBLED to DISASSEMBLED
             provided ( !isAssembled )
 				do {
-					printf("\033[32m[Output]:\033[0m Surfaces disconnected to core\n");
+					printf("\033[32m[Surface]:\033[0m Surfaces disassembled to Core\n");
 					isAssembled = !isAssembled;
 				}
 	end
@@ -70,23 +71,22 @@ package SimpleBlinky
 	atom type CORE(int id)
 		data bool isAssembled = false
 
-		export port SyncPort CORE_ASSEMBLE()
-    	export port SyncPort CORE_DISASSEMBLE()
+		export port CorePort CORE_ASSEMBLE(isAssembled)
+    	export port CorePort CORE_DISASSEMBLE(isAssembled)
 
 		place ASSEMBLED, DISASSEMBLED
 		initial to DISASSEMBLED
 
 		on CORE_ASSEMBLE from DISASSEMBLED to ASSEMBLED
-            provided ( isAssembled )
-				do {
-					printf("\033[32mBlock %d\033[0m assembled", id);
-					isAssembled = !isAssembled;				}
+			do {
+				printf("\033[32mBlock %d\033[0m assembled\n", id);
+				isAssembled = true;				
+			}
 
 		on CORE_DISASSEMBLE from ASSEMBLED to DISASSEMBLED 
-			provided ( !isAssembled )
 			do{
-				printf("\033[32mBlock %d\033[0m disassembled", id);
-				isAssembled = !isAssembled;
+				printf("\033[32mBlock %d\033[0m disassembled\n", id);
+				isAssembled = false;
 			}
 
 	end

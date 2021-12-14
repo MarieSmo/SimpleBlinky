@@ -73,7 +73,7 @@ when(true
 initializer {
     shape = new Shape()
     
-    for(i : seq(0, 3)) {
+    for(i : seq(0, 1)) {
         block = new Block()
 
         // Core
