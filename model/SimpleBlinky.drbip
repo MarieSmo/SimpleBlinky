@@ -25,6 +25,7 @@ import from "SimpleBlinky.cpp" {
         void connectRight(Node, Node)
         const bool isNeighbour(Node, Node, int)
         const bool hasNeighbour(Node, int)
+        const bool isAlrdeadyConnected(Node, Node)
     }
 
     addressing BBAddressing {
@@ -47,33 +48,22 @@ motif Shape<BBMap, BBAddressing> {
 
 global rule ConnectLeftBlockIMR(Shape shape, CORE cLeft, CORE cRight, Block bLeft, Block bRight, SURFACE sLeft, SURFACE sRight)
 when(true,
-    cLeft IN shape.C,
-    cRight IN shape.C,
+    cLeft IN shape.C && !shape.S.hasNeighbour(shape.@cLeft, 1),
+    cRight IN shape.C && cLeft != cRight && !shape.S.hasNeighbour(shape.@cRight, 2) && !shape.S.isAlrdeadyConnected(shape.@cLeft, shape.@cRight),
     cLeft in bLeft.C,
     cRight in bRight.C && bRight != bLeft,
     sLeft in bLeft.C && bLeft.S.isLeft(bLeft.@sLeft),
-    sRight in bRight.C && bRight.S.isRight(bRight.@sRight) && bRight != bLeft,
-    !shape.S.hasNeighbour(shape.@cLeft, 1),
-    !shape.S.hasNeighbour(shape.@cRight, 2)
+    sRight in bRight.C && bRight.S.isRight(bRight.@sRight) && bRight != bLeft
 )
 {
-    shape.connectSurface(sLeft, sRight)
-    shape.S.connectLeft(shape.@cLeft, shape.@cRight)
+     shape.connectSurface(sLeft, sRight)
+     shape.S.connectLeft(shape.@cLeft, shape.@cRight)
 }
-
-/*
-global rule ConnectRightBlock(Shape shape, CORE cLeft, CORE cRight, Block bLeft, Block bRight, SURFACE sLeft, SURFACE sRight)
-when(true
-)
-{
-    ConnectLeftBlock(shape, cRight, cLeft, bRight, bLeft, sRight, sLeft)
-}
-*/
 
 initializer {
     shape = new Shape()
     
-    for(i : seq(0, 1)) {
+    for(i : seq(0, 2)) {
         block = new Block()
 
         // Core
@@ -90,17 +80,19 @@ initializer {
         (CORE FROM shape.C).insert(core)
 
         // Surface left
-        sl = new SURFACE(4)
+        sl = new SURFACE(4, i)
         NodeSL = block.S.create()
         block.@.bind(sl, NodeSL)
         block.S.setSurfaceLeft(NodeSL)
         (SURFACE FROM block.C).insert(sl)
 
         // Surface right
-        sr = new SURFACE(8)
+        sr = new SURFACE(8, i)
         NodeSR = block.S.create()
         block.@.bind(sr, NodeSR)
         block.S.setSurfaceRight(NodeSR)
         (SURFACE FROM block.C).insert(sr)
+
+        //block.Assembled(core, sl, sr)
   }
 }

@@ -84,7 +84,7 @@ namespace reconfigure {
         typedef struct surface {
             struct surface *left;
             struct surface *right;
-            } surfaces;
+        } surfaces;
 
         surfaces * initSurfaces() {
             surfaces *l = new surfaces;
@@ -121,7 +121,7 @@ namespace reconfigure {
             blocks = bbmap->blocks;
         }
 
-                //Direction: 1 left, 2 right, 3 top, 4 bottom, 5 front, 6 back
+        //Direction: 1 left, 2 right, 3 top, 4 bottom, 5 front, 6 back
         bool isNeighbour(Node *n1, Node *n2, int direction) {
             if(n1 && n2) {
                 switch (direction) {
@@ -138,6 +138,12 @@ namespace reconfigure {
                     break;
                 }
             }
+            return false;
+        }
+
+        bool isAlrdeadyConnected(Node *n1, Node *n2) {
+            if(blocks.find(n1)->second->left == blocks.find(n2)->second) return true;
+            if(blocks.find(n1)->second->right == blocks.find(n2)->second) return true;
             return false;
         }
 

@@ -2,8 +2,8 @@
 package SimpleBlinky
 	extern function printf(string)
 	extern function printf(string, int)
-
 	extern function printf(string, string)
+	extern function printf(string, string, int)
 	extern function string connection(int)
 
 	port type SurfacePort()
@@ -28,7 +28,7 @@ package SimpleBlinky
 	// ID represent the type of the surface
 	// 		1: left
 	//		2: right
-	atom type SURFACE(int surface_id)
+	atom type SURFACE(int surface_id, int core_id)
 		data bool connect = false
 		data bool isAssembled = false
 
@@ -61,14 +61,14 @@ package SimpleBlinky
 		on CONNECT_CORE from DISCONNECTED to CONNECTED
             provided ( !isAssembled )
 				do {
-					printf("\033[32m[Surface %s]:\033[0m Connected to core\n", connection(surface_id));
+					printf("\033[32m[Surface %s]:\033[0m Connected to core %d\n", connection(surface_id), core_id);
 					isAssembled = !isAssembled;
 				}
 
 		on DISCONNECT_CORE from CONNECTED to DISCONNECTED
 			provided( isAssembled )
 				do {
-					printf("\033[32m[Surface %s]:\033[0m Disconnected to core\n", connection(surface_id));
+					printf("\033[32m[Surface %s]:\033[0m Disconnected to core %d\n", connection(surface_id), core_id);
 					isAssembled = !isAssembled;
 				}
 	end
@@ -98,12 +98,12 @@ package SimpleBlinky
 
 	compound type SYS()
 		component CORE c1(1)
-		component SURFACE s1_left(4)
-		component SURFACE s1_right(8)
+		component SURFACE s1_left(4, 1)
+		component SURFACE s1_right(8, 1)
 
 		component CORE c2(2)
-		component SURFACE s2_left(4)
-		component SURFACE s2_right(8)
+		component SURFACE s2_left(4, 1)
+		component SURFACE s2_right(8, 1)
 
 		connector ConnectCoreAndSurface assemble_block_1(c1.CORE_ASSEMBLE, s1_left.CONNECT_CORE, s1_right.CONNECT_CORE)
 		connector ConnectCoreAndSurface assemble_block_2(c2.CORE_ASSEMBLE, s2_left.CONNECT_CORE, s2_right.CONNECT_CORE)
