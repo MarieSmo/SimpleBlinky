@@ -20,6 +20,10 @@ package SimpleBlinky
 
 	connector type DisconnectCoreAndSurface(CorePort core, SurfacePort surface_left, SurfacePort surface_right)
 		define core surface_left surface_right
+		on core surface_left surface_right
+			down {
+				core.isAssembled = false;
+			}
 	end
 
 	atom type SURFACE()
@@ -30,8 +34,8 @@ package SimpleBlinky
 		export port SurfacePort CONNECT()
         export port SurfacePort DISCONNECT()
 		// Core assemble and disassemble
-		export port CorePort ASSEMBLE()
-		export port CorePort DISASSEMBLE()
+		export port SurfacePort CONNECT_CORE()
+		export port SurfacePort DISCONNECT_CORE()
 
         //possible states for all surface ports
 		place DISCONNECTED, CONNECTED, ASSEMBLED, DISASSEMBLED
@@ -53,14 +57,14 @@ package SimpleBlinky
 					connect = !connect ;
 				}
 
-		on ASSEMBLE from DISASSEMBLED to ASSEMBLED
+		on CONNECT_CORE from DISASSEMBLED to ASSEMBLED
 			provided( isAssembled )
 				do {
 					printf("\033[32m[Surface]:\033[0m Surfaces assembled to Core\n");
 					isAssembled = !isAssembled;
 				}
 
-		on DISASSEMBLE from ASSEMBLED to DISASSEMBLED
+		on DISCONNECT_CORE from ASSEMBLED to DISASSEMBLED
             provided ( !isAssembled )
 				do {
 					printf("\033[32m[Surface]:\033[0m Surfaces disassembled to Core\n");
@@ -71,19 +75,19 @@ package SimpleBlinky
 	atom type CORE(int id)
 		data bool isAssembled = false
 
-		export port CorePort CORE_ASSEMBLE(isAssembled)
-    	export port CorePort CORE_DISASSEMBLE(isAssembled)
+		export port CorePort ASSEMBLE(isAssembled)
+    	export port CorePort DISASSEMBLE(isAssembled)
 
 		place ASSEMBLED, DISASSEMBLED
 		initial to DISASSEMBLED
 
-		on CORE_ASSEMBLE from DISASSEMBLED to ASSEMBLED
+		on ASSEMBLE from DISASSEMBLED to ASSEMBLED
 			do {
 				printf("\033[32mBlock %d\033[0m assembled\n", id);
 				isAssembled = true;				
 			}
 
-		on CORE_DISASSEMBLE from ASSEMBLED to DISASSEMBLED 
+		on DISASSEMBLE from ASSEMBLED to DISASSEMBLED 
 			do{
 				printf("\033[32mBlock %d\033[0m disassembled\n", id);
 				isAssembled = false;
@@ -100,14 +104,14 @@ package SimpleBlinky
 		component SURFACE s2_left()
 		component SURFACE s2_right()
 
-		connector ConnectCoreAndSurface assemble_block_1(c1.CORE_ASSEMBLE, s1_left.CONNECT_CORE, s1_right.CONNECT_CORE)
-		connector ConnectCoreAndSurface assemble_block_2(c2.CORE_ASSEMBLE, s2_left.CONNECT_CORE, s2_right.CONNECT_CORE)
+		connector ConnectCoreAndSurface assemble_block_1(c1.ASSEMBLE, s1_left.CONNECT_CORE, s1_right.CONNECT_CORE)
+		connector ConnectCoreAndSurface assemble_block_2(c2.ASSEMBLE, s2_left.CONNECT_CORE, s2_right.CONNECT_CORE)
 
 		connector Connection connect_block_1_2(s1_left.CONNECT, s2_right.CONNECT)
 		connector Connection disconnect_block_1_2(s1_left.DISCONNECT, s2_right.DISCONNECT)
 
-		connector DisconnectCoreAndSurface disassemble_block_1(c1.CORE_DISASSEMBLE, s1_left.CONNECT_CORE, s1_right.CONNECT_CORE)
-		connector DisconnectCoreAndSurface disassemble_block_2(c2.CORE_DISASSEMBLE, s2_left.CONNECT_CORE, s2_right.CONNECT_CORE)
+		connector DisconnectCoreAndSurface disassemble_block_1(c1.DISASSEMBLE, s1_left.DISCONNECT_CORE, s1_right.DISCONNECT_CORE)
+		connector DisconnectCoreAndSurface disassemble_block_2(c2.DISASSEMBLE, s2_left.DISCONNECT_CORE, s2_right.DISCONNECT_CORE)
 	end
 
 end
