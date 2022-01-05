@@ -6,71 +6,90 @@ package SimpleBlinky
 	extern function printf(string, string, int)
 	extern function string connection(int)
 
-	port type SurfacePort()
+	port type SurfacePortAssemble(bool isAssembled)
+    port type SurfacePortConnect(bool isConnected)
 	port type CorePort(bool isAssembled)
 
-	connector type Connection(SurfacePort b1, SurfacePort b2)
-		define b1 b2
+	connector type Connection(SurfacePortConnect s1, SurfacePortConnect s2)
+		define s1 s2
+        on s1 s2
+			down {
+				s1.isConnected = true;
+				s2.isConnected = true;
+                printf("\n\n\n----- HERE IS CONNECTION ------\n\n\n");
+			}
 	end
 
-	connector type ConnectCoreAndSurface(CorePort core, SurfacePort surface_left, SurfacePort surface_right)
+	connector type ConnectCoreAndSurface(CorePort core, SurfacePortAssemble surface_left, SurfacePortAssemble surface_right)
 		define core surface_left surface_right
 		on core surface_left surface_right
 			down {
 				core.isAssembled = true;
+                surface_left.isAssembled = true;
+                surface_right.isAssembled = true;
+                printf("\n\n\n----- HERE IS ASSEMBLAGE------\n\n\n");
 			}
 	end
 
-	connector type DisconnectCoreAndSurface(CorePort core, SurfacePort surface_left, SurfacePort surface_right)
+	connector type DisconnectCoreAndSurface(CorePort core, SurfacePortAssemble surface_left, SurfacePortAssemble surface_right)
 		define core surface_left surface_right
+        on core surface_left surface_right
+			down {
+				core.isAssembled = false;
+                surface_left.isAssembled = false;
+                surface_right.isAssembled = false;
+                printf("\n\n\n----- HERE IS DISASSEMBLAGE------\n\n\n");
+			}
 	end
 
 	// ID represent the type of the surface
 	// 		1: left
 	//		2: right
 	atom type SURFACE(int surface_id, int core_id)
-		data bool connect = false
+		data bool isConnected = false
 		data bool isAssembled = false
 
 		// SEED connection and deconnection (output signal in parent block)
-		export port SurfacePort CONNECT()
-        export port SurfacePort DISCONNECT()
-		export port SurfacePort CONNECT_CORE()
-		export port SurfacePort DISCONNECT_CORE()
+		export port SurfacePortConnect CONNECT(isConnected)
+        export port SurfacePortConnect DISCONNECT(isConnected)
+		export port SurfacePortAssemble CONNECT_CORE(isAssembled)
+		export port SurfacePortAssemble DISCONNECT_CORE(isAssembled)
 
-        //possible states for all surface ports
-		place DISCONNECTED, CONNECTED
-		initial to DISCONNECTED
+        // DISASSEMBLED mean that the SURFACE is not connected yet to a block.
+        // ASSEMBLED mean that the SURFACE is a part of a block and connect to a CORE. It is not connected to another surfaces.
+        // CONNECTED mean that the SURFACE is ASSEMBLED and connect to another surface.
+		place DISASSEMBLED, ASSEMBLED, CONNECTED
+		initial to DISASSEMBLED
 
 		// SURFACE instruction for left and right surface when state change
-		on CONNECT from DISCONNECTED to CONNECTED
-			provided( !connect )
-				do {
-				    printf("\033[32m[Surface %s]:\033[0m Connected\n", connection(surface_id));
-					connect = !connect;
-				}
+        on CONNECT_CORE from DISASSEMBLED to ASSEMBLED
+            provided (!isAssembled)
+            do {
+                printf("\033[32m[Surface %s]:\033[0m Assembled to core %d\n", connection(surface_id), core_id);
+				isAssembled = true;				
+            }
+        
+        on CONNECT from ASSEMBLED to CONNECTED
+            provided (isAssembled && !isConnected)
+            do {
+                printf("\033[32m[Surface %s]:\033[0m Connected\n", connection(surface_id));
+                isConnected = true;
+            }
 
 		// SURFACE instruction when disconnected
-		on DISCONNECT from CONNECTED to DISCONNECTED
-			provided( connect )
-				do {
-					printf("\033[32m[Surface %s]:\033[0m Disconnected\n", connection(surface_id));
-					connect = !connect ;
-				}
+		on DISCONNECT from CONNECTED to ASSEMBLED
+            provided (isAssembled && isConnected)
+            do {
+                printf("\033[32m[Surface %s]:\033[0m Disconnected\n", connection(surface_id));
+                isConnected = false;
+            }
 
-		on CONNECT_CORE from DISCONNECTED to CONNECTED
-            provided ( !isAssembled )
-				do {
-					printf("\033[32m[Surface %s]:\033[0m Connected to core %d\n", connection(surface_id), core_id);
-					isAssembled = !isAssembled;
-				}
-
-		on DISCONNECT_CORE from CONNECTED to DISCONNECTED
-			provided( isAssembled )
-				do {
-					printf("\033[32m[Surface %s]:\033[0m Disconnected to core %d\n", connection(surface_id), core_id);
-					isAssembled = !isAssembled;
-				}
+		on DISCONNECT_CORE from ASSEMBLED to DISASSEMBLED
+            provided (isAssembled)
+            do {
+                printf("\033[32m[Surface %s]:\033[0m Disassembled to core %d\n", connection(surface_id), core_id);
+				isAssembled = false;
+            }
 	end
 
 	atom type CORE(int id)

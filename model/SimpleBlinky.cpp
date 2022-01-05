@@ -1,8 +1,8 @@
-#include<drbip.h>
-#include<SimpleBlinkyTypes.hpp>
-#include<map>
-#include<list>
-#include<set>
+#include <drbip.h>
+#include <SimpleBlinkyTypes.hpp>
+#include <map>
+#include <list>
+#include <set>
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -148,25 +148,25 @@ namespace reconfigure {
         }
 
         //Direction: 1 left, 2 right, 3 top, 4 bottom, 5 front, 6 back
-        bool hasNeighbour(Node *node, int direction) {
+        bool hasNeighbour(Node *node, AT__CORE* core, int direction) {
             if(!node) return false;
             surfaces *surface = blocks.find(node)->second;
 
             switch (direction) {
             case 1:
                 if(surface->left) {
-                    printf("\033[32m[Output]:\033[0m Left already connected\n");
+                    printf("\033[32m[Output]:\033[0m Surface \033[33mleft\033[0m from \033[33mblock %d\033[0m already connected\n", core->_param__id);
                     return true;
                 }
-                printf("\033[32m[Output]:\033[0m Left not yet connected\n");
+                printf("\033[32m[Output]:\033[0m Surface \033[33mleft\033[0m from \033[33mblock %d\033[0m not yet connected\n", core->_param__id);
                 return false;
                 break;
             case 2:
                 if(surface->right) {
-                    printf("\033[32m[Output]:\033[0m Right already connected\n");
+                    printf("\033[32m[Output]:\033[0m Surface \033[33mright\033[0m from \033[33mblock %d\033[0m already connected\n", core->_param__id);
                     return true;
                 }
-                printf("\033[32m[Output]:\033[0m Right not yet connected\n");
+                printf("\033[32m[Output]:\033[0m Surface \033[33mright\033[0m from \033[33mblock %d\033[0m not yet connected\n", core->_param__id);
                 return false;
                 break;
             default:
