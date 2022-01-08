@@ -17,6 +17,7 @@ import from "SimpleBlinky.cpp" {
         const bool isCore(Node)
         const bool isLeft(Node)
         const bool isRight(Node)
+        const int getCoreId(CORE)
     }
 
     structure BBMap {
@@ -26,6 +27,9 @@ import from "SimpleBlinky.cpp" {
         const bool isNeighbour(Node, Node, int)
         const bool hasNeighbour(Node, CORE, int)
         const bool isAlrdeadyConnected(Node, Node)
+        void printConnection(CORE, int, CORE, int)
+        const bool isSurfaceFreeToUse(SURFACE)
+        const bool isAssemble(CORE)
     }
 
     addressing BBAddressing {
@@ -33,30 +37,59 @@ import from "SimpleBlinky.cpp" {
 }
 
 motif Block<SimpleBlinkyMap, DefaultAddressing> {
-    rule interaction Assembled(CORE core, SURFACE left, SURFACE right)
+    rule interaction AssembledIR(CORE core, SURFACE left, SURFACE right)
     when(S.isCore(@core), S.isLeft(@left), S.isRight(@right)){
         new ConnectCoreAndSurface(core, left, right)
+    }
+
+    rule configuration BlockAdd() when(C.size() < 1)
+    {
+        core = new CORE(C.size()-1)
+
+        // --- Core used for the BlinkyBlock element
+        nodeCoreBlock = S.create()
+        S.setCore(nodeCoreBlock)
+        @.bind(core, nodeCoreBlock)
+        (CORE FROM C).insert(core)
+
+        // Surface left
+        sl = new SURFACE(4, S.getCoreId(core))
+        NodeSL = S.create()
+        @.bind(sl, NodeSL)
+        S.setSurfaceLeft(NodeSL)
+        (SURFACE FROM C).insert(sl)
+
+        // Surface right
+        sr = new SURFACE(8, S.getCoreId(core))
+        NodeSR = S.create()
+        @.bind(sr, NodeSR)
+        S.setSurfaceRight(NodeSR)
+        (SURFACE FROM C).insert(sr)
     }
 }
 
 motif Shape<BBMap, DefaultAddressing> {
-    rule interaction connectSurface(SURFACE s1, SURFACE s2)
-    when(true, s1 != s2) {
+    rule interaction ConnectionIR(SURFACE s1, SURFACE s2)
+    when(
+        true,
+        s1 != s2
+    ) {
         new Connection(s1, s2)
     }
 }
 
-global rule ConnectLeftBlockIMR(Shape shape, CORE cLeft, CORE cRight, Block bLeft, Block bRight, SURFACE sLeft, SURFACE sRight)
+global rule ConnectBlockOnXAxisIMR(Shape shape, CORE cLeft, CORE cRight, Block bLeft, Block bRight, SURFACE sLeft, SURFACE sRight)
 when(true,
-    cLeft IN shape.C && !shape.S.hasNeighbour(shape.@cLeft, cLeft, 1),
-    cRight IN shape.C && cLeft != cRight && !shape.S.hasNeighbour(shape.@cRight, cRight, 2) && !shape.S.isAlrdeadyConnected(shape.@cLeft, shape.@cRight),
+    cLeft IN shape.C && !shape.S.hasNeighbour(shape.@cLeft, cLeft, 1) /*&& shape.S.isAssemble(cLeft)*/,
+    cRight IN shape.C && cLeft != cRight && !shape.S.hasNeighbour(shape.@cRight, cRight, 2) /*&& shape.S.isAssemble(cRight)*/ && !shape.S.isAlrdeadyConnected(shape.@cLeft, shape.@cRight),
     cLeft in bLeft.C,
-    cRight in bRight.C && bRight != bLeft,
-    sLeft in bLeft.C && bLeft.S.isLeft(bLeft.@sLeft),
-    sRight in bRight.C && bRight.S.isRight(bRight.@sRight) && bRight != bLeft
+    cRight in bRight.C && bLeft != bRight,
+    sLeft in bLeft.C && bLeft.S.isLeft(bLeft.@sLeft) && shape.S.isSurfaceFreeToUse(sLeft),
+    sRight in bRight.C && bRight.S.isRight(bRight.@sRight) && sLeft != sRight && shape.S.isSurfaceFreeToUse(sRight)
 )
 {
-    shape.connectSurface(sLeft, sRight)
+    shape.ConnectionIR(sLeft, sRight)
+    shape.S.printConnection(cLeft, 4, cRight, 8)
     // new Connection(sLeft, sRight)
     shape.S.connectLeft(shape.@cLeft, shape.@cRight)
 }
@@ -64,34 +97,15 @@ when(true,
 initializer {
     shape = new Shape()
 
-    for(i : seq(0, 2)) {
+    for(i : seq(1, 4)) {
         block = new Block()
-
         // Core
-        core = new CORE(i)
+        block.BlockAdd()
 
-        nodeCoreBlock = block.S.create()
-        block.S.setCore(nodeCoreBlock)
-        block.@.bind(core, nodeCoreBlock)
-        (CORE FROM block.C).insert(core)
-
-        nodeCoreShape = shape.S.create()
+        // --- Core used into the shape to connect different block between each other
+        /*nodeCoreShape = shape.S.create()
         shape.S.insertCore(nodeCoreShape)
         shape.@.bind(core, nodeCoreShape)
-        (CORE FROM shape.C).insert(core)
-
-        // Surface left
-        sl = new SURFACE(4, i)
-        NodeSL = block.S.create()
-        block.@.bind(sl, NodeSL)
-        block.S.setSurfaceLeft(NodeSL)
-        (SURFACE FROM block.C).insert(sl)
-
-        // Surface right
-        sr = new SURFACE(8, i)
-        NodeSR = block.S.create()
-        block.@.bind(sr, NodeSR)
-        block.S.setSurfaceRight(NodeSR)
-        (SURFACE FROM block.C).insert(sr)
+        (CORE FROM shape.C).insert(core.getCore())*/
     }
 }

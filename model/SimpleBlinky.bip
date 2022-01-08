@@ -14,9 +14,19 @@ package SimpleBlinky
 		define s1 s2
         on s1 s2
 			down {
-				s1.isConnected = true;
-				s2.isConnected = true;
-                printf("\n\n\n----- HERE IS CONNECTION ------\n\n\n");
+				//s1.isConnected = true;
+				//s2.isConnected = true;
+                printf("\n----- DISCONNECTION ------\n\n");
+			}
+	end
+
+	connector type Disconnection(SurfacePortConnect s1, SurfacePortConnect s2)
+		define s1 s2
+        on s1 s2
+			down {
+				//s1.isConnected = false;
+				//s2.isConnected = false;
+                printf("\n----- CONNECTION ------\n\n");
 			}
 	end
 
@@ -24,10 +34,10 @@ package SimpleBlinky
 		define core surface_left surface_right
 		on core surface_left surface_right
 			down {
-				core.isAssembled = true;
-                surface_left.isAssembled = true;
-                surface_right.isAssembled = true;
-                printf("\n\n\n----- HERE IS ASSEMBLAGE------\n\n\n");
+				//core.isAssembled = true;
+                //surface_left.isAssembled = true;
+                //surface_right.isAssembled = true;
+                printf("\n----- ASSEMBLE------\n\n");
 			}
 	end
 
@@ -35,10 +45,10 @@ package SimpleBlinky
 		define core surface_left surface_right
         on core surface_left surface_right
 			down {
-				core.isAssembled = false;
-                surface_left.isAssembled = false;
-                surface_right.isAssembled = false;
-                printf("\n\n\n----- HERE IS DISASSEMBLAGE------\n\n\n");
+				//core.isAssembled = false;
+                //surface_left.isAssembled = false;
+                //surface_right.isAssembled = false;
+                printf("\n----- DISASSEMBLE------\n\n");
 			}
 	end
 
@@ -46,8 +56,8 @@ package SimpleBlinky
 	// 		1: left
 	//		2: right
 	atom type SURFACE(int surface_id, int core_id)
-		data bool isConnected = false
-		data bool isAssembled = false
+		data bool isConnected
+		data bool isAssembled
 
 		// SEED connection and deconnection (output signal in parent block)
 		export port SurfacePortConnect CONNECT(isConnected)
@@ -59,7 +69,7 @@ package SimpleBlinky
         // ASSEMBLED mean that the SURFACE is a part of a block and connect to a CORE. It is not connected to another surfaces.
         // CONNECTED mean that the SURFACE is ASSEMBLED and connect to another surface.
 		place DISASSEMBLED, ASSEMBLED, CONNECTED
-		initial to DISASSEMBLED
+		initial to DISASSEMBLED do {isAssembled = false; isConnected = false;}
 
 		// SURFACE instruction for left and right surface when state change
         on CONNECT_CORE from DISASSEMBLED to ASSEMBLED
@@ -93,13 +103,13 @@ package SimpleBlinky
 	end
 
 	atom type CORE(int id)
-		data bool isAssembled = false
+		data bool isAssembled
 
 		export port CorePort CORE_ASSEMBLE(isAssembled)
     	export port CorePort CORE_DISASSEMBLE(isAssembled)
 
 		place ASSEMBLED, DISASSEMBLED
-		initial to DISASSEMBLED
+		initial to DISASSEMBLED do {isAssembled = false;}
 
 		on CORE_ASSEMBLE from DISASSEMBLED to ASSEMBLED
 			do {
@@ -128,6 +138,9 @@ package SimpleBlinky
 		connector ConnectCoreAndSurface assemble_block_2(c2.CORE_ASSEMBLE, s2_left.CONNECT_CORE, s2_right.CONNECT_CORE)
 
 		connector Connection connect_block_1_2(s1_left.CONNECT, s2_right.CONNECT)
+		connector Connection connect_block_2_1(s2_left.CONNECT, s1_right.CONNECT)
+
+		connector Connection disconnect_block_2_1(s2_left.DISCONNECT, s1_right.DISCONNECT)
 		connector Connection disconnect_block_1_2(s1_left.DISCONNECT, s2_right.DISCONNECT)
 
 		connector DisconnectCoreAndSurface disassemble_block_1(c1.CORE_DISASSEMBLE, s1_left.DISCONNECT_CORE, s1_right.DISCONNECT_CORE)
